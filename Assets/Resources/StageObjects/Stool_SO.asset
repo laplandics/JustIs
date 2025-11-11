@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc348fd3f6640b380b4bed7d7b350b1, type: 3}
+  m_Name: Stool_SO
+  m_EditorClassIdentifier: Assembly-CSharp::StageObject
+  id: 8a6050ca-14c6-4ce4-94e4-3096f3d33324
+  prefab: {fileID: 4258595799226841111, guid: 35c5a09737a80924d8ed0f228d8e9b02, type: 3}
+  position: {x: 0, y: 0, z: -5}
+  rotation: {x: 0, y: 1, z: 0, w: 0}
+  scale: {x: 1, y: 1, z: 1}
+  load: 1
+  onLoadEvent: {fileID: 0}
+  onUnloadEvent: {fileID: 0}
+  excludeStages: 
+  instance: {fileID: 0}

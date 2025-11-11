@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc348fd3f6640b380b4bed7d7b350b1, type: 3}
+  m_Name: LightQuad_SO
+  m_EditorClassIdentifier: Assembly-CSharp::StageObject
+  id: a38cbfe2-2e0c-4b7a-aab8-6203ead0d535
+  prefab: {fileID: 2858856231610519137, guid: 2914c285abf66ee438c3bdae763f8add, type: 3}
+  position: {x: 0, y: 5.2, z: -6.314}
+  rotation: {x: 0, y: 0.8870109, z: 0.46174863, w: 0}
+  scale: {x: 1, y: 1, z: 1}
+  load: 1
+  onLoadEvent: {fileID: 0}
+  onUnloadEvent: {fileID: 0}
+  excludeStages: 
+  instance: {fileID: 0}

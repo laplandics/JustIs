@@ -1,0 +1,46 @@
+﻿using UnityEngine;
+
+public class Revolver : InteractableObject, IGrabable
+{
+    [SerializeField] private Collider interactionCollider;
+    [SerializeField] private Transform holdPoint;
+    [SerializeField] private Rigidbody rb;
+    
+    public Rigidbody Rb => rb;
+    public Transform HoldPoint => holdPoint;
+
+    public void Grab(Transform parent)
+    {
+        interactionCollider.enabled = false;
+        Rb.isKinematic = true;
+        var tr = transform;
+        tr.SetParent(parent);
+        tr.position = parent.position;
+        tr.rotation = parent.rotation;
+        tr.localScale = Vector3.one;
+        tr.localPosition -= HoldPoint.localPosition;
+        tr.localRotation = Quaternion.Inverse(HoldPoint.localRotation);
+        
+        EventService.Invoke(new OnRevolverGrabbedEvent());
+    }
+
+    public void Release(Transform parent, Vector3 position)
+    {
+        interactionCollider.enabled = true;
+        var tr = transform;
+        tr.SetParent(parent);
+        tr.position = position;
+        tr.rotation = Quaternion.Euler(GetRotation());
+        tr.localScale = Vector3.one;
+        Rb.isKinematic = false;
+    }
+    
+    private static Vector3 GetRotation()
+    {
+        var randomX = Random.Range(0, 360);
+        var randomY = Random.Range(0, 360);
+        var randomZ = Random.Range(0, 360);
+        var rotationRandom = new Vector3(randomX, randomY, randomZ);
+        return rotationRandom;
+    }
+}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc348fd3f6640b380b4bed7d7b350b1, type: 3}
+  m_Name: Player_SO
+  m_EditorClassIdentifier: Assembly-CSharp::StageObject
+  id: 22e98898-65a6-403d-8815-760b7acb93af
+  prefab: {fileID: 4936626388271850255, guid: aed2ca741810cfe4782a7cd295d3ab43, type: 3}
+  position: {x: 0, y: 0.097, z: 3.887}
+  rotation: {x: 0, y: 1, z: 0, w: 0}
+  scale: {x: 1, y: 1, z: 1}
+  load: 1
+  onLoadEvent: {fileID: 11400000, guid: d0758bc356f4b1b4bbc777ef9fcbe888, type: 2}
+  onUnloadEvent: {fileID: 11400000, guid: aa168fa73f63a334fa2583d71ba78f43, type: 2}
+  excludeStages: 
+  instance: {fileID: 0}
