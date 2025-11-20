@@ -5,10 +5,10 @@ public class GameManager : MonoBehaviour, ISceneManager
 {
     public void Initialize()
     {
-        Subscribe<OnManagersInitializedEvent>(StartGame);
+        Subscribe<OnGameStarted>(StartGame);
     }
 
-    private void StartGame(OnManagersInitializedEvent eventData)
+    private void StartGame(OnGameStarted eventData)
     {
         G.GetManager<GameStageManager>().BeginCycle();
         G.GetManager<UiManager>().HideCursor();

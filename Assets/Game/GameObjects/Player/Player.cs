@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : StageObject
 {
     [SerializeField] private Transform cameraPoint;
     [SerializeField] private CharacterController playerController;

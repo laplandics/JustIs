@@ -168,6 +168,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd59fcbd117a30c42932625901d09d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Surface
+  id: 
+  position: {x: 0, y: 0, z: -1.42}
+  rotation: {x: 0, y: 0, z: 0, w: 1}
+  scale: {x: 1, y: 1, z: 1}
+  onLoadEvent: {fileID: 0}
+  onUnloadEvent: {fileID: 0}
+  load: 1
+  traits: 
+  excludeStages: 
+  instance: {fileID: 0}
 --- !u!114 &-1768586218207474392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,9 +190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d4bf07203b4925beb7a3b95073dcbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LayDown
-  thisObject: {fileID: -4509523579288702496}
-  distance: 2
   targetSprite: {fileID: 7482667652216324306, guid: 9ed6c1bb8dfd70947950d7385af81b21, type: 3}
+  interactionCollider: {fileID: 266048576536287433}
+  distance: 2
 --- !u!4 &3014047260280383235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4e644e376fedaeb47881bc98d12f1311, type: 3}

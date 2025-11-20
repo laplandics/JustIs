@@ -16,11 +16,14 @@ public class AimRaycaster : IDisposable
         private set
         {
             if (value == _interactable && !_distanceChanged) return;
-            if (_interactable != null) _interactable.ResetInteraction();
+            if (value == _interactable && _distanceChanged) { _interactable?.DistanceToObjectChanged(InteractableCollider); return; }
+            if (value != _interactable) _interactable?.InteractableChanged();
             _interactable = value;
-            _interactable?.PrepareInteraction();
+            _interactable?.PrepareInteraction(InteractableCollider);
         }
     }
+    
+    private Collider InteractableCollider { get; set; }
     
     public AimRaycaster()
     {
@@ -40,6 +43,7 @@ public class AimRaycaster : IDisposable
         _lastDistance = hit.distance;
         _distanceChanged = true;
         if (!instance.gameObject.TryGetComponent<InteractableObject>(out var interactable)) { Interactable = null; return; }
+        InteractableCollider = instance;
         Interactable = interactable;
     }
     

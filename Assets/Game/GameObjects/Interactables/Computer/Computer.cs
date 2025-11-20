@@ -4,6 +4,7 @@ public class Computer : InteractableObject, IExaminable
 {
     [SerializeField] private Canvas examineUi;
     [SerializeField] private Transform visual;
+    [SerializeField] private ComputerUIHandler computerUIHandler;
     
     public Canvas ExamineUi => examineUi;
     public Transform Visual => visual;

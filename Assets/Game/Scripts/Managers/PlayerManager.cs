@@ -53,7 +53,7 @@ public class PlayerManager : MonoBehaviour, ISceneManager
     private void OnInteract(InputValue value)
     {
         if (!_isPlayerActive) return;
-        _aimRaycaster.Interactable?.Interact();
+        _aimRaycaster.Interactable?.Interact(value.isPressed);
     }
     
     //Cut

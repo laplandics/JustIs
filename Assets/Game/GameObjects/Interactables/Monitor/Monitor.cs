@@ -26,4 +26,9 @@ public class Monitor : InteractableObject, IShootable
         Debug.Log("Monitor was shot");
         EventService.Invoke(new OnMonitorShotEvent());
     }
+
+    private void OnDestroy()
+    {
+        EventService.Unsubscribe<OnMonitorUiChangedEvent>(_uIChanger.SetMonitorUi);
+    }
 }

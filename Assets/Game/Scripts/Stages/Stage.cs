@@ -6,7 +6,7 @@ public abstract class Stage : MonoBehaviour
     
     public virtual void StartStage()
     {
-        EventService.Invoke(new OnStageStartEvent {StartedStage = stageNum});
+        G.GetService<SpecialGameStatesService>().GetState<CurrentGameStage>().Set(stageNum);
         SpawnStage();
     }
 
@@ -17,17 +17,18 @@ public abstract class Stage : MonoBehaviour
     
     private static void SpawnStage()
     {
-        G.GetService<StageObjectsService>().LoadStageObjects();
+        
     }
 
     private static void DespawnStage()
     {
-        G.GetService<StageObjectsService>().UnloadStageObjects();
+        
     }
 }
 
 public enum StageNum
 {
+    None,
     StageOne,
     StageTwo,
     StageThree,

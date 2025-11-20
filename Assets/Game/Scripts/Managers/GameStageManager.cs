@@ -12,9 +12,7 @@ public class GameStageManager : MonoBehaviour, ISceneManager
     public void Initialize()
     {
         _stages = gameObject.GetComponentsInChildren<Stage>().ToList();
-        
         EventService.Subscribe<OnStageEndEvent>(ChangeStage);
-        
         _currentStage = _stages[0];
     }
 
@@ -56,6 +54,7 @@ public class GameStageManager : MonoBehaviour, ISceneManager
     public void Deinitialize()
     {
         _stages.Clear();
+        G.GetService<SpecialGameStatesService>().GetState<CurrentGameStage>().Set(StageNum.None);
         EventService.Unsubscribe<OnStageEndEvent>(ChangeStage);
     }
 }

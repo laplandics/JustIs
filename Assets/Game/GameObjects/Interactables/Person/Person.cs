@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class Person : InteractableObject, IShootable, IExaminable
 {
+    [SerializeField] private PersonType[] personTypes;
     [SerializeField] private Rigidbody keyRigidBody;
     [SerializeField] private Transform bodyKey;
     [SerializeField] private Canvas examineUi;
     [SerializeField] private Transform visual;
+    private TypeConfig[] _personTypeConfigs; 
+    private PersonType _currentPersonType;
     private bool _isShot;
     
     public Canvas ExamineUi => examineUi;
@@ -13,12 +16,26 @@ public class Person : InteractableObject, IShootable, IExaminable
     
     protected override void Launch()
     {
-        G.GetManager<RoutineManager>().StartUpdateAction(UpdateRotation);
+        if (!Application.isPlaying) return;
+        G.GetManager<RoutineManager>().StartUpdateAction(UpdateColliderRotation);
+        ChangePersonType();
     }
 
-    private void UpdateRotation()
+    private void UpdateColliderRotation()
     {
-        transform.localRotation = bodyKey.localRotation;
+        transform.rotation = bodyKey.rotation;
+    }
+
+    private void ChangePersonType()
+    {
+        var currentState = G.GetService<SpecialGameStatesService>().GetState<CurrentGameStage>().Get();
+        foreach (var personType in personTypes)
+        {
+            if (personType.stageNum != currentState) continue;
+            _currentPersonType = personType;
+            _personTypeConfigs = _currentPersonType.personTypeConfigs;
+            break;
+        }
     }
 
     public void GetShot()
@@ -34,6 +51,7 @@ public class Person : InteractableObject, IShootable, IExaminable
     public void Examine()
     {
         examineUi.gameObject.SetActive(true);
+        foreach (var config in _personTypeConfigs) { config.PerformConfiguration(this); }
     }
 
     public void Release()
@@ -43,6 +61,7 @@ public class Person : InteractableObject, IShootable, IExaminable
 
     private void OnDestroy()
     {
-        G.GetManager<RoutineManager>()?.StopUpdateAction(UpdateRotation);
+        G.GetManager<RoutineManager>()?.StopUpdateAction(UpdateColliderRotation);
+        _currentPersonType = null;
     }
 }

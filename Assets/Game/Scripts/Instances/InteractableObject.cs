@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class InteractableObject : MonoBehaviour
+public abstract class InteractableObject : StageObject
 {
     private readonly Dictionary<Type, IInteractionPreset> _presets = new();
 
@@ -17,16 +17,33 @@ public abstract class InteractableObject : MonoBehaviour
 
     protected virtual void Launch() {}
 
-    public void Interact() => CurrentPreset?.PerformInteraction();
-    public void PrepareInteraction() => CurrentPreset = GetInteraction();
-    public void ResetInteraction() { CurrentPreset?.Reset(); CurrentPreset = null; }
+    public void Interact(bool isPressed)
+    {
+        if(isPressed) CurrentPreset?.PerformInteraction();
+        else CurrentPreset?.CancelInteraction();
+    }
+    public void PrepareInteraction(Collider colliderInfo) => CurrentPreset = GetInteraction(colliderInfo);
 
-    private IInteractionPreset GetInteraction()
+    public void DistanceToObjectChanged(Collider colliderInfo)
+    {
+        if (CurrentPreset == null) {PrepareInteraction(colliderInfo); return;}
+        if (CurrentPreset.IsRelevant(colliderInfo)) return;
+        CurrentPreset.Reset();
+        CurrentPreset = null;
+    }
+
+    public void InteractableChanged()
+    {
+        CurrentPreset?.Reset();
+        CurrentPreset = null;
+    }
+
+    private IInteractionPreset GetInteraction(Collider colliderInfo)
     {
         IInteractionPreset interaction = null;
         foreach (var preset in _presets.Values)
         {
-            if (!preset.IsRelevant()) continue;
+            if (!preset.IsRelevant(colliderInfo)) continue;
             interaction = preset;
         }
         return interaction;

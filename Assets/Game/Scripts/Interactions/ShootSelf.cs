@@ -1,9 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class ShootSelf : MonoBehaviour, IInteractionPreset
+public class ShootSelf : BaseInteraction
 {
-    [SerializeField] private Sprite targetSprite;
     private Transform _cameraTr;
     private Transform _shootSelfPoint;
     private Transform _hand;
@@ -13,9 +12,7 @@ public class ShootSelf : MonoBehaviour, IInteractionPreset
     private int _layerMask;
     private bool _canBePerformed;
     
-    public Sprite TargetSprite => targetSprite;
-    
-    public bool IsRelevant()
+    public override bool IsRelevant(Collider colliderInfo)
     {
         if (_isChecking) return true;
         var player = G.GetManager<PlayerManager>().GetPlayer();
@@ -23,6 +20,7 @@ public class ShootSelf : MonoBehaviour, IInteractionPreset
         if (hand.childCount == 0) return false;
         var revolver = hand.GetChild(0).GetComponent<Revolver>();
         if (revolver == null) return false;
+        if (!base.IsRelevant(colliderInfo)) return false;
         
         _hand = hand;
         _revolver = revolver;
@@ -64,15 +62,13 @@ public class ShootSelf : MonoBehaviour, IInteractionPreset
         _canBePerformed = false;
     }
 
-    public void PerformInteraction()
+    public override void PerformInteraction()
     {
         if (!_canBePerformed) return;
         print($"{this} performed");
     }
-
-    public void UpdateUI(bool showUI) => EventService.Invoke(new OnUpdateUIEvent {Sprite = showUI ? TargetSprite : null});
     
-    public void Reset()
+    public override void Reset()
     {
         if (_isChecking) return;
         if (_checkRoutine != null) G.GetManager<RoutineManager>()?.EndRoutine(_checkRoutine);

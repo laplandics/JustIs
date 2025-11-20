@@ -35,7 +35,7 @@ public class EntryPoint : MonoBehaviour
             managers.Add(sceneManager);
         }
         G.CacheGameServices(managers);
-        EventService.Invoke(new OnManagersInitializedEvent());
+        G.GetService<SpecialGameStatesService>().GetState<IsGameStarted>().Set(true);
     }
 
     private void EnableInputs()
@@ -57,6 +57,7 @@ public class EntryPoint : MonoBehaviour
             if (manager is not ISceneManager sceneManager) continue;
             sceneManager.Deinitialize();
         }
+        G.GetService<SpecialGameStatesService>().GetState<IsGameStarted>().Set(false);
     }
 
     private void StopGameServices()

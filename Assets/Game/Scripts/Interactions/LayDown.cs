@@ -1,30 +1,29 @@
 ﻿using UnityEngine;
 
-public class LayDown : MonoBehaviour, IInteractionPreset
+public class LayDown : BaseInteraction
 {
-    [SerializeField] private float distance; 
-    [SerializeField] private Sprite targetSprite;
     private IGrabable _layingObject;
     private RaycastHit _hit;
 
-    public Sprite TargetSprite => targetSprite;
-
-    public bool IsRelevant()
+    public override bool IsRelevant(Collider colliderInfo)
     {
         if (!TryGetRaycastHit()) return false;
         var player = G.GetManager<PlayerManager>().GetPlayer();
         if (player.Hand.childCount == 0) return false;
         _layingObject = player.Hand.GetChild(0)?.GetComponent<InteractableObject>() as IGrabable;
         if (_layingObject == null) return false;
+        if (InteractionCollider != colliderInfo) return false;
         UpdateUI(true);
         return true;
     }
 
-    public void PerformInteraction()
+    public override void PerformInteraction()
     {
-        var target = _hit.point + new Vector3(0, 0.1f, 0);
+        var target = _hit.point + new Vector3(0, 0.2f, 0);
         _layingObject.Release(null, target);
     }
+    
+    public override void CancelInteraction() {}
 
     private bool TryGetRaycastHit()
     {
@@ -32,14 +31,7 @@ public class LayDown : MonoBehaviour, IInteractionPreset
         var cameraTransform = G.GetManager<CameraManager>().GetCameraTransform();
         var ray = new Ray(cameraTransform.position, cameraTransform.forward);
         var layerMask = ~playerManager.GetIgnoredLayers();
-        var canLayDown = Physics.Raycast(ray.origin, ray.direction, out _hit, distance, layerMask);
+        var canLayDown = Physics.Raycast(ray.origin, ray.direction, out _hit, Distance, layerMask);
         return canLayDown;
-    }
-    
-    public void UpdateUI(bool showUI) => EventService.Invoke(new OnUpdateUIEvent {Sprite = showUI ? TargetSprite : null});
-
-    public void Reset()
-    {
-        UpdateUI(false);
     }
 }

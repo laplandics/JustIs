@@ -15,6 +15,7 @@ public class RoutineManager : MonoBehaviour, ISceneManager
     public void StartUpdateAction(Action action) => _updateActions.Add(action);
     public void StartFixedUpdateAction(Action action) => _fixedUpdateActions.Add(action);
     public void StartLateUpdateAction(Action action) => _lateUpdateActions.Add(action);
+    public void PlanInvoke(string methodName, float time) => Invoke(methodName, time);
     public void StopUpdateAction(Action action) => _updateActions.Remove(action);
     public void StopFixedUpdateAction(Action action) => _fixedUpdateActions.Remove(action);
     public void StopLateUpdateAction(Action action) => _lateUpdateActions.Remove(action);

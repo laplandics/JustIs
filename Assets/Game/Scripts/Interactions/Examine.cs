@@ -1,32 +1,27 @@
-﻿using Unity.Cinemachine;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Examine : MonoBehaviour, IInteractionPreset, ICameraLocker, IPlayerLocker
+public class Examine : BaseInteraction, ICameraLocker, IPlayerLocker
 {
     [SerializeField] private Transform cameraPoint;
-    [SerializeField] private float distance;
-    [SerializeField] private Sprite targetSprite;
-    private CinemachineCamera _cmCamera;
     private Vector3 _lastCameraLocalPosition;
     
-    public Sprite TargetSprite => targetSprite;
     public CameraConfigurationPreset CameraConfigPreset => GetCameraConfiguration();
     
-    public bool IsRelevant()
+    public override bool IsRelevant(Collider colliderInfo)
     {
-        _cmCamera = G.GetManager<CameraManager>().GetCamera();
-        var isInDistance = !(Vector3.Distance(_cmCamera.transform.position, transform.position) > distance);
-        if (isInDistance) UpdateUI(true);
-        return isInDistance;
+        if (base.IsRelevant(colliderInfo)) {UpdateUI(true); return true;}
+        return false;
     }
 
-    public void PerformInteraction()
+    public override void PerformInteraction()
     {
         EventService.Invoke(new OnInteractionEventStarted {Preset = this});
         G.GetManager<PlayerManager>().GetPlayer().Hand.gameObject.SetActive(false);
         GetComponent<IExaminable>()?.Examine();
         EventService.Subscribe<OnInteractionEventEnded>(EndExamineInteraction);
     }
+
+    public override void CancelInteraction() {}
 
     private void EndExamineInteraction(OnInteractionEventEnded _)
     {
@@ -43,13 +38,5 @@ public class Examine : MonoBehaviour, IInteractionPreset, ICameraLocker, IPlayer
         preset.CameraLocalPosition = Vector3.zero;
         preset.CameraLocalRotation = Vector3.forward;
         return preset;
-    }
-    
-    public void UpdateUI(bool showUI) => EventService.Invoke(new OnUpdateUIEvent {Sprite = showUI ? TargetSprite : null});
-    
-    public void Reset()
-    {
-        UpdateUI(false);
-        _cmCamera = null;
     }
 }

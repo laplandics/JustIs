@@ -14,19 +14,20 @@ public class InputService : ScriptableObject, IGameService
     {
         _actions = new Dictionary<InputsType, string>();
         foreach (var inputMap in inputMaps) { _actions.TryAdd(inputMap.type, inputMap.name); }
-        EventService.Subscribe<OnManagersInitializedEvent>(AssignManagers);
+        EventService.Subscribe<OnGameStarted>(AssignManagers);
         EventService.Subscribe<OnInteractionEventStarted>(LockPlayer);
         EventService.Subscribe<OnInteractionEventEnded>(FreePlayer);
     }
     
-    private void AssignManagers(OnManagersInitializedEvent obj) { _playerManager = G.GetManager<PlayerManager>(); }
+    private void AssignManagers(OnGameStarted obj) { _playerManager = G.GetManager<PlayerManager>(); }
     private void LockPlayer(OnInteractionEventStarted eventData) { if (eventData.Preset is IPlayerLocker) ChangeInputs(InputsType.Interaction); }
     private void FreePlayer(OnInteractionEventEnded _) => ChangeInputs(InputsType.Player);
+
     public void ChangeInputs(InputsType type) { _playerManager.GetPlayerInput().SwitchCurrentActionMap(_actions[type]); }
 
     public void Stop()
     {
-        EventService.Unsubscribe<OnManagersInitializedEvent>(AssignManagers);
+        EventService.Unsubscribe<OnGameStarted>(AssignManagers);
         EventService.Unsubscribe<OnInteractionEventStarted>(LockPlayer);
         EventService.Unsubscribe<OnInteractionEventEnded>(FreePlayer);
         _actions.Clear();

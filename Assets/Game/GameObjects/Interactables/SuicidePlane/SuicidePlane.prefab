@@ -67,6 +67,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 006dbfca64de5f94ea6b109d33c6bd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SuicidePlane
+  id: 
+  position: {x: 0, y: 4.47, z: 0}
+  rotation: {x: 0, y: 0, z: 0, w: 1}
+  scale: {x: 1, y: 1, z: 1}
+  onLoadEvent: {fileID: 0}
+  onUnloadEvent: {fileID: 0}
+  load: 1
+  traits: 
+  excludeStages: 
+  instance: {fileID: 0}
 --- !u!114 &-5165861161545213798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,3 +90,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShootSelf
   targetSprite: {fileID: -9095717837082945937, guid: ae70f68d4192a4d48b583b922b3d3237, type: 3}
+  interactionCollider: {fileID: 9053544110912089662}
+  distance: 100

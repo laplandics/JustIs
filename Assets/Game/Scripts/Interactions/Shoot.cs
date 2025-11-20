@@ -1,14 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
-public class Shoot : MonoBehaviour, IInteractionPreset
+public class Shoot : BaseInteraction
 {
-    [SerializeField] private Sprite targetSprite;
     [SerializeField] private float minDistance;
+    [SerializeField] private float timeToShoot;
     private Revolver _revolver;
-    
-    public Sprite TargetSprite => targetSprite;
+    private bool _isInteractionCancelled = true;
 
-    public bool IsRelevant()
+    public override bool IsRelevant(Collider colliderInfo)
     {
         var hand = G.GetManager<PlayerManager>().GetPlayer().Hand;
         if (hand.childCount == 0) return false;
@@ -16,17 +16,31 @@ public class Shoot : MonoBehaviour, IInteractionPreset
         if (_revolver == null) return false;
         var playerCam = G.GetManager<CameraManager>().GetCameraTransform();
         var isInDistance = Vector3.Distance(transform.position, playerCam.position) > minDistance;
-        if (isInDistance) UpdateUI(true);
-        return isInDistance;
+        if (!isInDistance) return false;
+        if (InteractionCollider != colliderInfo) return false;
+        UpdateUI(true);
+        return true;
     }
 
-    public void PerformInteraction()
+    public override void PerformInteraction()
     {
         if (!gameObject.TryGetComponent<IShootable>(out var shootable)) return;
-        shootable.GetShot();
+        _isInteractionCancelled = false;
+        G.GetManager<RoutineManager>().StartRoutine(WaitForShoot(shootable));
     }
 
-    public void UpdateUI(bool showUI) => EventService.Invoke(new OnUpdateUIEvent {Sprite = showUI ? TargetSprite : null});
-    
-    public void Reset() { _revolver = null; UpdateUI(false); }
+    private IEnumerator WaitForShoot(IShootable shootable)
+    {
+        var time = 0.0f;
+        while (!_isInteractionCancelled)
+        {
+            time += Time.deltaTime;
+            if(time >= timeToShoot) {shootable.GetShot(); CancelInteraction(); }
+            yield return null;
+        }
+    }
+
+    public override void CancelInteraction() { _isInteractionCancelled = true; }
+
+    public override void Reset() { _revolver = null; UpdateUI(false); CancelInteraction(); }
 }

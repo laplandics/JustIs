@@ -265,7 +265,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 430901517553819918}
-  - component: {fileID: 8386195444333370449}
   m_Layer: 6
   m_Name: TabletUi
   m_TagString: Untagged
@@ -288,19 +287,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3374662545094570245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8386195444333370449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2535047734103919848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 019eaa28d22fe9f48805d14ea4fbd276, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletUi
-  button: {fileID: 1621104087831358975}
 --- !u!1 &4304059367726191891
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +505,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7197ac1075bcd4f4981b3a98b163556a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tablet
+  id: 
+  position: {x: 0, y: 0.941, z: -1.3649999}
+  rotation: {x: 0, y: 0, z: 0, w: 1}
+  scale: {x: 1, y: 1, z: 1}
+  onLoadEvent: {fileID: 0}
+  onUnloadEvent: {fileID: 0}
+  load: 1
+  traits: 
+  excludeStages: 
+  instance: {fileID: 0}
   examineUi: {fileID: 3266331656167219207}
   visual: {fileID: 5700862863932910390}
 --- !u!114 &2956562571074541879
@@ -533,9 +529,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272e3fd11630471b9a7ad2d18299bf52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Examine
-  cameraPoint: {fileID: 7748493670417960219}
-  distance: 2.1
   targetSprite: {fileID: 7482667652216324306, guid: 3b80bba60c5ec3944867779c3d291c27, type: 3}
+  interactionCollider: {fileID: 1846469660988948225}
+  distance: 2.1
+  cameraPoint: {fileID: 7748493670417960219}
 --- !u!65 &1846469660988948225
 BoxCollider:
   m_ObjectHideFlags: 0

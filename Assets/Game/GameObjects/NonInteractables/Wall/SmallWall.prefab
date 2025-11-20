@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4248347074887688238}
   - component: {fileID: 8652241738397967267}
   - component: {fileID: 1381284114648419726}
+  - component: {fileID: -5808462617011077232}
   m_Layer: 0
   m_Name: SmallWall
   m_TagString: Untagged
@@ -111,3 +112,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5808462617011077232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4136465874177986623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0044759abcd1431abe8ce1b1ba6e90b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NonInteractableObject
+  id: 
+  position: {x: 2.539, y: 1.5635, z: -1.068}
+  rotation: {x: 0, y: 0, z: 0, w: 1}
+  scale: {x: 1.5160961, y: 3.2183797, z: 0.05}
+  onLoadEvent: {fileID: 0}
+  onUnloadEvent: {fileID: 0}
+  load: 1
+  traits: 
+  excludeStages: 
+  instance: {fileID: 0}

@@ -1,0 +1,205 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a31c88ef39b4340b71a330a95012b46, type: 3}
+  m_Name: ObjectDataService
+  m_EditorClassIdentifier: Assembly-CSharp::StageObjectsService
+  configs:
+  - name: 3DPrinter_CO
+    objectData:
+    - prefab: {fileID: 1929736603012466313, guid: 61178edaceec9664fb0b98848b422eb6, type: 3}
+      position: {x: -2.749, y: 0.829, z: 1.446}
+      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: AncestorsStatue_CO
+    objectData:
+    - prefab: {fileID: 2367479614586515424, guid: d8801dff068678749ab1153e140d67c6, type: 3}
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 00000000
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: RoomCenterTable_CO
+    objectData:
+    - prefab: {fileID: -4509523579288702496, guid: 554a6578fd29ff2418392d4d3f3b4277, type: 3}
+      position: {x: 0, y: 0, z: -1.361}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: Computer_CO
+    objectData:
+    - prefab: {fileID: 1043336111035792158, guid: afe5f8873281e374485ad3562bd543a9, type: 3}
+      position: {x: -2.64, y: 0.84, z: 0.654}
+      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: RoomLargeTable_CO
+    objectData:
+    - prefab: {fileID: 1904105611437572892, guid: d303845d74a7fe347b6ea397e72ab578, type: 3}
+      position: {x: -2.7, y: 0, z: 0.9}
+      rotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: RoomMetalTable_CO
+    objectData:
+    - prefab: {fileID: -2966484304407068846, guid: 0d6c823bf06667b41b9ccd3b0f0624fb, type: 3}
+      position: {x: 2.596, y: 0, z: 0}
+      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: Monitor_CO
+    objectData:
+    - prefab: {fileID: 3443866770175899588, guid: 85b2b285913a19841a39235f597027f3, type: 3}
+      position: {x: 0, y: 4, z: -5.5335655}
+      rotation: {x: 0.06770795, y: -0, z: -0, w: 0.9977053}
+      scale: {x: 1, y: 1, z: 1}
+    - prefab: {fileID: 3443866770175899588, guid: 85b2b285913a19841a39235f597027f3, type: 3}
+      position: {x: -3.342165, y: 4, z: -2.7732291}
+      rotation: {x: 0.105701186, y: 0.54195344, z: -0.068945184, w: 0.8308793}
+      scale: {x: 1, y: 1, z: 1}
+    - prefab: {fileID: 3443866770175899588, guid: 85b2b285913a19841a39235f597027f3, type: 3}
+      position: {x: 3.342165, y: 4, z: -2.7732291}
+      rotation: {x: 0.105701186, y: -0.54195344, z: 0.068945184, w: 0.8308793}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: Person_CO
+    objectData:
+    - prefab: {fileID: 5245033197510155566, guid: b2ac6bd1e7fcdb3428f2e8a80808dfbf, type: 3}
+      position: {x: 0, y: 1.89, z: -4.72}
+      rotation: {x: 0.62958103, y: -0, z: -0, w: 0.7769348}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: Revolver_CO
+    objectData:
+    - prefab: {fileID: 2353389104407872629, guid: 1f645fa5f7b0e0b42bce23a44fec56a3, type: 3}
+      position: {x: -0.603, y: 1.3730141, z: -1.3939202}
+      rotation: {x: -0.22571662, y: -0, z: -0, w: 0.97419304}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: SuicidePlane_CO
+    objectData:
+    - prefab: {fileID: 145825052300130259, guid: ad32eaf8d22537549b3f268dfa561585, type: 3}
+      position: {x: 0, y: 4.478, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: Tablet_CO
+    objectData:
+    - prefab: {fileID: 511689398007123781, guid: 12af17c3587fbfb4aad3d44333a71081, type: 3}
+      position: {x: 0, y: 0.895, z: -1.331}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: Quad_CO
+    objectData:
+    - prefab: {fileID: 6989769569480468844, guid: 2914c285abf66ee438c3bdae763f8add, type: 3}
+      position: {x: 0, y: 5.172, z: -6.381}
+      rotation: {x: 0, y: 1, z: 0, w: 0}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: Room_CO
+    objectData:
+    - prefab: {fileID: 2750192896926296063, guid: 3be7c358bb7090646807b4f5a0159a47, type: 3}
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: RoomShelf_CO
+    objectData:
+    - prefab: {fileID: 8401250001111256780, guid: afa7ce3343f756741a70a3514c975354, type: 3}
+      position: {x: 2.7, y: 0, z: 3.7}
+      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: RoomStool_CO
+    objectData:
+    - prefab: {fileID: 7653036355829401487, guid: 35c5a09737a80924d8ed0f228d8e9b02, type: 3}
+      position: {x: 0, y: 0, z: -5.041}
+      rotation: {x: 0, y: 1, z: 0, w: 0}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: SmallWall_CO
+    objectData:
+    - prefab: {fileID: -5808462617011077232, guid: 48d5f490583764e4ebcf8d01e82f18e4, type: 3}
+      position: {x: 2.7, y: 1.5, z: -1.321}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1.5, y: 3.1, z: 0.05}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 
+  - name: Player_CO
+    objectData:
+    - prefab: {fileID: 435533037416635696, guid: aed2ca741810cfe4782a7cd295d3ab43, type: 3}
+      position: {x: 0, y: 0, z: 4}
+      rotation: {x: 0, y: 1, z: 0, w: 0}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents:
+    - {fileID: 11400000, guid: d0758bc356f4b1b4bbc777ef9fcbe888, type: 2}
+    despawnEvents:
+    - {fileID: 11400000, guid: aa168fa73f63a334fa2583d71ba78f43, type: 2}
+    excludedStages: 
+  - name: ExplosiveCollar_CO
+    objectData:
+    - prefab: {fileID: -5342226787787400673, guid: 0608c233620ce75439e4428bc7621bd7, type: 3}
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 
+    spawnEvents: []
+    despawnEvents: []
+    excludedStages: 

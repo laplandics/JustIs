@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class InteractableComponent : InteractableObject
 {
-    [SerializeField] private InteractableObject mainInteractable;
+    [SerializeField] private InteractableObject parentObject;
 
-    public override void Enable() { mainInteractable.Enable(); }
+    public override void Enable() { parentObject.Enable(); }
 }

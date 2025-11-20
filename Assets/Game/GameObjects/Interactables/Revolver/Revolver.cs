@@ -8,6 +8,7 @@ public class Revolver : InteractableObject, IGrabable
     
     public Rigidbody Rb => rb;
     public Transform HoldPoint => holdPoint;
+    public Collider InteractionCollider => interactionCollider;
 
     public void Grab(Transform parent)
     {
