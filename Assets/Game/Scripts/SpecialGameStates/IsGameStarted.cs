@@ -7,6 +7,7 @@ public class IsGameStarted : SpecialGameState<bool>
     {
         value = status;
         if(status) EventService.Invoke(new OnGameStarted());
+        base.Set(status);
     }
 
     public override bool Get() { return value; }

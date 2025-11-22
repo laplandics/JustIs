@@ -4,37 +4,39 @@
     {
         EventService.Subscribe<OnStageLoadEvent>(FirstPart);
         EventService.Subscribe<OnTabletExaminedEvent>(SecondPart);
-        EventService.Subscribe<OnRevolverGrabbedEvent>(ThirdPart);
+        EventService.Subscribe<OnRevolverGrabStatusChanged>(ThirdPart);
         EventService.Subscribe<OnPersonShotEvent>(FourthPart);
         base.StartStage();
     }
     
     private void FirstPart(OnStageLoadEvent _)
     {
-        EventService.Invoke(new OnMonitorUiChangedEvent { Type = OnMonitorUiChangedEvent.EventType.ShouldReadTablet });
+        G.GetService<SpecialGameStatesService>().GetState<CurrentMonitorUi>().Set(MonitorUiType.ShouldReadTablet);
     }
 
     private void SecondPart(OnTabletExaminedEvent _)
     {
-        EventService.Invoke(new OnMonitorUiChangedEvent { Type = OnMonitorUiChangedEvent.EventType.ShouldGrabRevolver });
+        G.GetService<SpecialGameStatesService>().GetState<CurrentMonitorUi>().Set(MonitorUiType.ShouldGrabRevolver);
     }
 
-    private void ThirdPart(OnRevolverGrabbedEvent _)
+    private void ThirdPart(OnRevolverGrabStatusChanged eventData)
     {
-        EventService.Invoke(new OnMonitorUiChangedEvent { Type = OnMonitorUiChangedEvent.EventType.ShouldShootPerson });
+        var uiType = eventData.IsGrabbed ? MonitorUiType.ShouldShootPerson : MonitorUiType.ShouldGrabRevolver;
+        G.GetService<SpecialGameStatesService>().GetState<CurrentMonitorUi>().Set(uiType);
     }
 
     private void FourthPart(OnPersonShotEvent _)
     {
-        EventService.Invoke(new OnMonitorUiChangedEvent { Type = OnMonitorUiChangedEvent.EventType.GoodJob });
-        EventService.Invoke(new OnStageEndEvent { IsSuccessful = true });
+        
+        G.GetService<SpecialGameStatesService>().GetState<CurrentMonitorUi>().Set(MonitorUiType.GoodJob);
+        EventService.Invoke(new OnStageEndEvent { NextStage = StageNum.StageTwo });
     }
 
     public override void EndStage()
     {
         EventService.Unsubscribe<OnStageLoadEvent>(FirstPart);
         EventService.Unsubscribe<OnTabletExaminedEvent>(SecondPart);
-        EventService.Unsubscribe<OnRevolverGrabbedEvent>(ThirdPart);
+        EventService.Unsubscribe<OnRevolverGrabStatusChanged>(ThirdPart);
         EventService.Unsubscribe<OnPersonShotEvent>(FourthPart);
         base.EndStage();
     }

@@ -875,16 +875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90aa0ab3533777643b4db9aa274066b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Computer
-  id: 
-  position: {x: -2.722, y: 0.856, z: 2.39}
-  rotation: {x: 0, y: 0.6845471, z: 0, w: 0.7289686}
-  scale: {x: 1, y: 1, z: 1}
-  onLoadEvent: {fileID: 0}
-  onUnloadEvent: {fileID: 0}
-  load: 1
-  traits: 
-  excludeStages: 
-  instance: {fileID: 0}
   examineUi: {fileID: 2753036134363137305}
   visual: {fileID: 7923156555908096700}
   computerUIHandler: {fileID: 7071931594617886562}
@@ -916,7 +906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b30d4295fd42b09133b8900b0dbcc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComputerUIHandler
-  viewPortContent: {fileID: 2387033064043387901}
+  contentContainer: {fileID: 2387033064043387901}
   buttonPrefab: {fileID: 2904280915025575950, guid: 4b62b299016a34f40b44acce856c63ef, type: 3}
 --- !u!1 &7310603701742949717
 GameObject:

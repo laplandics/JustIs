@@ -289,7 +289,7 @@
                     "name": "Submit",
                     "type": "Button",
                     "id": "c7fafa34-9dae-466d-a64d-ef9d717815da",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -298,7 +298,7 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "a565ce46-08ab-49a1-9fc6-a02b918fffa4",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -783,6 +783,54 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Debug",
+            "id": "c8ebbb31-8929-49b4-b154-9894cafa0bf2",
+            "actions": [
+                {
+                    "name": "Call Debug Console",
+                    "type": "Button",
+                    "id": "bdc31d3e-e1db-42d3-806c-a10c6255941a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Confirm Console Command",
+                    "type": "Button",
+                    "id": "2a0f7741-ec06-46b2-8d64-9cb6cee20f75",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "94341a93-96d3-4cb0-8067-196c1e2a44ce",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Call Debug Console",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b6de68d-e6ec-4ec2-b05f-5e3435a80b80",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm Console Command",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

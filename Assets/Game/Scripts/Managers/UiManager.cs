@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour, ISceneManager
 {
-    [SerializeField] private UiSettings uiSettings;
+    [SerializeField] private Canvas canvasPrefab;
     [SerializeField] private Transform canvasParent;
     private InteractableObject _interactable;
     private Canvas _canvas;
@@ -12,10 +12,11 @@ public class UiManager : MonoBehaviour, ISceneManager
 
     public void Initialize()
     {
-        _canvas = SpawnManager.Spawn(uiSettings.canvas, Vector3.zero, Quaternion.identity, canvasParent);
+        _canvas = SpawnManager.Spawn(canvasPrefab, Vector3.zero, Quaternion.identity, canvasParent);
+        G.GetService<SpecialGameStatesService>().GetState<GlobalCanvasSpawned>().Set(_canvas);
         _targetPoint = _canvas.GetComponentInChildren<Image>();
-        EventService.Subscribe<OnInteractionEventStarted>(HideTargetPoint);
-        EventService.Subscribe<OnInteractionEventEnded>(ShowTargetPoint);
+        EventService.Subscribe<OnUiInteractionStarted>(HideTargetPoint);
+        EventService.Subscribe<OnUiInteractionEnded>(ShowTargetPoint);
         EventService.Subscribe<OnUpdateUIEvent>(UpdateTargetPoint);
     }
 
@@ -31,9 +32,9 @@ public class UiManager : MonoBehaviour, ISceneManager
         Cursor.visible = true;
     }
     
-    private void HideTargetPoint(OnInteractionEventStarted _) { ResetTargetPoint(); ShowCursor(); _hideTargetPoint = true; }
+    private void HideTargetPoint(OnUiInteractionStarted _) { ResetTargetPoint(); ShowCursor(); _hideTargetPoint = true; }
     private void ResetTargetPoint() { _targetPoint.color = Color.clear; }
-    private void ShowTargetPoint(OnInteractionEventEnded _) { HideCursor(); _hideTargetPoint = false; }
+    private void ShowTargetPoint(OnUiInteractionEnded _) { HideCursor(); _hideTargetPoint = false; }
 
     private void UpdateTargetPoint(OnUpdateUIEvent eventData)
     {
@@ -46,8 +47,8 @@ public class UiManager : MonoBehaviour, ISceneManager
     
     public void Deinitialize()
     {
-        EventService.Unsubscribe<OnInteractionEventStarted>(HideTargetPoint);
-        EventService.Unsubscribe<OnInteractionEventEnded>(ShowTargetPoint);
+        EventService.Unsubscribe<OnUiInteractionStarted>(HideTargetPoint);
+        EventService.Unsubscribe<OnUiInteractionEnded>(ShowTargetPoint);
         _canvas = null;
         _targetPoint = null;
     }

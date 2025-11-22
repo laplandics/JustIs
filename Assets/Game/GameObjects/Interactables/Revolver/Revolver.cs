@@ -22,7 +22,7 @@ public class Revolver : InteractableObject, IGrabable
         tr.localPosition -= HoldPoint.localPosition;
         tr.localRotation = Quaternion.Inverse(HoldPoint.localRotation);
         
-        EventService.Invoke(new OnRevolverGrabbedEvent());
+        G.GetService<SpecialGameStatesService>().GetState<IsRevolverInHands>().Set(true);
     }
 
     public void Release(Transform parent, Vector3 position)
@@ -34,6 +34,8 @@ public class Revolver : InteractableObject, IGrabable
         tr.rotation = Quaternion.Euler(GetRotation());
         tr.localScale = Vector3.one;
         Rb.isKinematic = false;
+        
+        G.GetService<SpecialGameStatesService>().GetState<IsRevolverInHands>().Set(false);
     }
     
     private static Vector3 GetRotation()

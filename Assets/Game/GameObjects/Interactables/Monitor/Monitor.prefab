@@ -367,6 +367,7 @@ MonoBehaviour:
   monitorText: {fileID: 249674240650741149}
   redMonitor: {fileID: 21300000, guid: afe10aa3aefc7424e9fceb87a3e70565, type: 3}
   blackMonitor: {fileID: 21300000, guid: d10d31357315db84ab2f2e8df59594af, type: 3}
+  timeToShoot: 1.1
 --- !u!114 &5733298775753242069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +384,6 @@ MonoBehaviour:
   interactionCollider: {fileID: 7704435216533049304}
   distance: 0
   minDistance: 0.5
-  timeToShoot: 0.5
 --- !u!65 &7704435216533049304
 BoxCollider:
   m_ObjectHideFlags: 0

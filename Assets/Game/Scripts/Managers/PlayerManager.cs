@@ -61,7 +61,7 @@ public class PlayerManager : MonoBehaviour, ISceneManager
     {
         Debug.LogWarning("Redo interaction end");
         if (!_isPlayerActive) return;
-        EventService.Invoke(new OnInteractionEventEnded());
+        EventService.Invoke(new OnUiInteractionEnded());
     }
 
     private void OnLock(InputValue value)

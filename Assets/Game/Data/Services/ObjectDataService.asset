@@ -22,17 +22,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
-  - name: AncestorsStatue_CO
-    objectData:
-    - prefab: {fileID: 2367479614586515424, guid: d8801dff068678749ab1153e140d67c6, type: 3}
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    traits: 00000000
-    spawnEvents: []
-    despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: RoomCenterTable_CO
     objectData:
     - prefab: {fileID: -4509523579288702496, guid: 554a6578fd29ff2418392d4d3f3b4277, type: 3}
@@ -42,7 +34,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: Computer_CO
     objectData:
     - prefab: {fileID: 1043336111035792158, guid: afe5f8873281e374485ad3562bd543a9, type: 3}
@@ -52,7 +46,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: RoomLargeTable_CO
     objectData:
     - prefab: {fileID: 1904105611437572892, guid: d303845d74a7fe347b6ea397e72ab578, type: 3}
@@ -62,7 +58,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: RoomMetalTable_CO
     objectData:
     - prefab: {fileID: -2966484304407068846, guid: 0d6c823bf06667b41b9ccd3b0f0624fb, type: 3}
@@ -72,7 +70,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: Monitor_CO
     objectData:
     - prefab: {fileID: 3443866770175899588, guid: 85b2b285913a19841a39235f597027f3, type: 3}
@@ -90,7 +90,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: Person_CO
     objectData:
     - prefab: {fileID: 5245033197510155566, guid: b2ac6bd1e7fcdb3428f2e8a80808dfbf, type: 3}
@@ -100,7 +102,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: Revolver_CO
     objectData:
     - prefab: {fileID: 2353389104407872629, guid: 1f645fa5f7b0e0b42bce23a44fec56a3, type: 3}
@@ -110,7 +114,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: SuicidePlane_CO
     objectData:
     - prefab: {fileID: 145825052300130259, guid: ad32eaf8d22537549b3f268dfa561585, type: 3}
@@ -120,7 +126,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: Tablet_CO
     objectData:
     - prefab: {fileID: 511689398007123781, guid: 12af17c3587fbfb4aad3d44333a71081, type: 3}
@@ -130,7 +138,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: Quad_CO
     objectData:
     - prefab: {fileID: 6989769569480468844, guid: 2914c285abf66ee438c3bdae763f8add, type: 3}
@@ -140,7 +150,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: Room_CO
     objectData:
     - prefab: {fileID: 2750192896926296063, guid: 3be7c358bb7090646807b4f5a0159a47, type: 3}
@@ -150,7 +162,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 0200000001000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: RoomShelf_CO
     objectData:
     - prefab: {fileID: 8401250001111256780, guid: afa7ce3343f756741a70a3514c975354, type: 3}
@@ -160,7 +174,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: RoomStool_CO
     objectData:
     - prefab: {fileID: 7653036355829401487, guid: 35c5a09737a80924d8ed0f228d8e9b02, type: 3}
@@ -170,7 +186,9 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: SmallWall_CO
     objectData:
     - prefab: {fileID: -5808462617011077232, guid: 48d5f490583764e4ebcf8d01e82f18e4, type: 3}
@@ -180,11 +198,13 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 01000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: Player_CO
     objectData:
     - prefab: {fileID: 435533037416635696, guid: aed2ca741810cfe4782a7cd295d3ab43, type: 3}
-      position: {x: 0, y: 0, z: 4}
+      position: {x: 0, y: 0.1, z: 4}
       rotation: {x: 0, y: 1, z: 0, w: 0}
       scale: {x: 1, y: 1, z: 1}
     traits: 
@@ -192,14 +212,30 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d0758bc356f4b1b4bbc777ef9fcbe888, type: 2}
     despawnEvents:
     - {fileID: 11400000, guid: aa168fa73f63a334fa2583d71ba78f43, type: 2}
-    excludedStages: 
+    stages: 0100000002000000
+    saveStateBetweenStages: 0
+    instances: []
   - name: ExplosiveCollar_CO
     objectData:
-    - prefab: {fileID: -5342226787787400673, guid: 0608c233620ce75439e4428bc7621bd7, type: 3}
+    - prefab: {fileID: -6173903742773511477, guid: 0608c233620ce75439e4428bc7621bd7, type: 3}
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     traits: 
     spawnEvents: []
     despawnEvents: []
-    excludedStages: 
+    stages: 
+    saveStateBetweenStages: 0
+    instances: []
+  - name: AncestorsStatue_CO
+    objectData:
+    - prefab: {fileID: 2367479614586515424, guid: d8801dff068678749ab1153e140d67c6, type: 3}
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    traits: 00000000
+    spawnEvents: []
+    despawnEvents: []
+    stages: 0100000002000000
+    saveStateBetweenStages: 1
+    instances: []

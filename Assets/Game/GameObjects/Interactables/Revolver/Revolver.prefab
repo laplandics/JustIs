@@ -129,16 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2532fdb3a2544d5b94d5a27fc548cf8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Revolver
-  id: 
-  position: {x: -0.652, y: 1.3899764, z: -1.4864055}
-  rotation: {x: -0.40209377, y: -0, z: -0, w: 0.9155985}
-  scale: {x: 1, y: 1, z: 1}
-  onLoadEvent: {fileID: 0}
-  onUnloadEvent: {fileID: 0}
-  load: 1
-  traits: 
-  excludeStages: 
-  instance: {fileID: 0}
   interactionCollider: {fileID: 7298934198242357201}
   holdPoint: {fileID: 8196264277822854320}
   rb: {fileID: 2493846489331351834}
@@ -156,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Grab
   targetSprite: {fileID: -2413806693520163455, guid: b8297ce8770997c42b178e39e4da6b86, type: 3}
   interactionCollider: {fileID: 7298934198242357201}
-  distance: 1.8
+  distance: 2.2
 --- !u!1001 &173902681951167997
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,8 +10,8 @@ public class CameraManager : MonoBehaviour, ISceneManager
     public void Initialize()
     {
         EventService.Subscribe<OnPlayerSpawnedEvent>(AssignCameraToPlayer);
-        EventService.Subscribe<OnInteractionEventStarted>(LockCameraToObject);
-        EventService.Subscribe<OnInteractionEventEnded>(ReturnCameraToPlayer);
+        EventService.Subscribe<OnUiInteractionStarted>(LockCameraToObject);
+        EventService.Subscribe<OnUiInteractionEnded>(ReturnCameraToPlayer);
     }
 
     private void AssignCameraToPlayer(OnPlayerSpawnedEvent eventData) { AssignCameraToPlayer(); }
@@ -36,13 +36,13 @@ public class CameraManager : MonoBehaviour, ISceneManager
         camTr.localScale = Vector3.one;
     }
 
-    private void LockCameraToObject(OnInteractionEventStarted eventData)
+    private void LockCameraToObject(OnUiInteractionStarted eventData)
     {
-        if (eventData.Preset is not ICameraLocker locker) return;
-        ConfigureCamera(locker.CameraConfigPreset);
+        if (eventData.CameraConfigPreset == null) return;
+        ConfigureCamera(eventData.CameraConfigPreset);
     }
 
-    private void ReturnCameraToPlayer(OnInteractionEventEnded _)
+    private void ReturnCameraToPlayer(OnUiInteractionEnded _)
     {
         ConfigureCamera(new CameraConfigurationPreset {IsFree = true});
     }
@@ -50,8 +50,8 @@ public class CameraManager : MonoBehaviour, ISceneManager
     public void Deinitialize()
     {
         EventService.Unsubscribe<OnPlayerSpawnedEvent>(AssignCameraToPlayer);
-        EventService.Unsubscribe<OnInteractionEventStarted>(LockCameraToObject);
-        EventService.Unsubscribe<OnInteractionEventEnded>(ReturnCameraToPlayer);
+        EventService.Unsubscribe<OnUiInteractionStarted>(LockCameraToObject);
+        EventService.Unsubscribe<OnUiInteractionEnded>(ReturnCameraToPlayer);
         _isCameraLocked = false;
     }
 }

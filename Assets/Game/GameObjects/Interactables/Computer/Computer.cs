@@ -11,10 +11,19 @@ public class Computer : InteractableObject, IExaminable
     public void Examine()
     {
         examineUi.gameObject.SetActive(true);
+        computerUIHandler.InitializeUi(this);
+    }
+
+    public void MarkObject(ObjectConfig config)
+    {
+        config.traits.Remove(ObjectTrait.Locked);
+        config.traits.Add(ObjectTrait.Unlocked);
+        EventService.Invoke(new OnNewStageObjectSelectedToPrintEvent {ObjectConfig = config});
     }
 
     public void Release()
     {
+        computerUIHandler.DeInitializeUi();
         examineUi.gameObject.SetActive(false);
     }
 }

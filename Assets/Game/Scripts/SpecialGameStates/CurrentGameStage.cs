@@ -1,13 +1,8 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "CurrentGameStage", menuName = "SpecialGameStates/CurrentGameStage")]
-public class CurrentGameStage : SpecialGameState<StageNum>
+public class CurrentGameStage : SpecialGameState<Stage>
 {
-    public override void Set(StageNum stage)
-    {
-        value = stage;
-        EventService.Invoke(new OnStageStartEvent {StartedStage = stage});
-    }
-
-    public override StageNum Get() { return value; }
+    public override void Set(Stage stage) { value = stage; base.Set(stage); }
+    public override Stage Get() { return value; }
 }

@@ -1,23 +1,32 @@
-using NaughtyAttributes;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "[StageNum]PT", menuName = "GameData/PersonType")]
+[CreateAssetMenu(fileName = "[TypeName]_PT", menuName = "GameData/PersonType")]
 public class PersonType : ScriptableObject
 {
-    public StageNum stageNum;
-    public string path;
-    public TypeConfig[] personTypeConfigs;
+    public StageNum typeStage;
+    public TriggerAction[] triggers;
+    public float defaultTrust;
+    public float defaultFear;
+    
+    private Person _person;
+    private bool _someStateInvoked;
 
-    [Button]
-    private void CreateConfigAssets()
+    public void Initialize(Person person)
     {
-        var index = 0;
-        foreach (var config in personTypeConfigs) { config.CreateAsset(path, stageNum.ToString(), index.ToString()); index++; }
+        _person = person;
+        foreach (var trigger in triggers) { trigger.targetPerson = _person; }
+        EventService.Subscribe<OnSomeStateChangedEvent>(CatchSomeStateInvocation);
     }
 
-    [Button]
-    private void DeleteConfigAssets()
+    private void CatchSomeStateInvocation(OnSomeStateChangedEvent eventData)
     {
-        foreach (var config in personTypeConfigs) { config.DeleteAsset(); }
+        foreach (var trigger in triggers) { if (trigger.state == eventData.State) trigger.PrepareToPerform(); }
+    }
+
+    public void Deinitialize()
+    {
+        _person = null;
+        foreach (var trigger in triggers) { trigger.Reset(); }
+        EventService.Unsubscribe<OnSomeStateChangedEvent>(CatchSomeStateInvocation);
     }
 }

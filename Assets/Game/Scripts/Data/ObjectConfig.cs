@@ -10,62 +10,68 @@ public class ObjectConfig
     public List<ObjectTrait> traits = new();
     public List<BaseSpecialEvent> spawnEvents = new();
     public List<BaseSpecialEvent> despawnEvents = new();
-    public List<StageNum> excludedStages = new();
-    private readonly List<StageObject> _instances = new();
-    private Type _mainType;
-
-    public ObjectConfig GetConfigByType<T>() where T : MonoBehaviour { return typeof(T) == _mainType ? this : null; }
-
-    public ObjectConfig GetConfigByTrait(ObjectTrait trait)
-    {
-        if (traits.Count == 0 || !traits.Contains(trait)) return null;
-        return this;
-    }
+    public List<StageNum> stages = new();
+    public bool saveStateBetweenStages;
     
-    public void Spawn()
+    [Header("InGame info")]
+    [SerializeField] private List<StageObject> instances = new();
+
+    public ObjectConfig GetConfigByName(string getName) => name[..name.IndexOf('_')] == getName ? this : null;
+
+    public void Spawn(bool cameraPos = false)
     {
-        if (Application.isPlaying)
-        {
-            var currentStage = G.GetService<SpecialGameStatesService>().GetState<CurrentGameStage>().Get();
-            if (excludedStages.Contains(currentStage)) return;
-        }
+        var playing = Application.isPlaying;
+        if (playing) if (traits.Contains(ObjectTrait.Locked)) return;
         foreach (var data in objectData)
         {
-            var instance = SpawnManager.Spawn(data.prefab, data.position, data.rotation);
-            if (instance.TryGetComponent<InteractableObject>(out var interactableObject)) interactableObject.Enable();
+            var dataPos = data.position;
+            if (cameraPos)
+            {
+                var cameraTr = G.GetManager<CameraManager>().GetCameraTransform();
+                dataPos = cameraTr.position + cameraTr.forward;
+            }
+            var instance = SpawnManager.Spawn(data.prefab, dataPos, data.rotation);
+            if (instance.TryGetComponent<InteractableObject>(out var interactableObject) && playing) interactableObject.Enable();
             instance.transform.localScale = data.scale;
             instance.name = data.prefab.name;
-            _instances.Add(instance);
+            instances.Add(instance);
         }
-        if (spawnEvents.Count > 0) return;
+        if (spawnEvents.Count == 0 || !playing) return;
         foreach (var spawnEvent in spawnEvents) { spawnEvent.Invoke(this); }
     }
 
     public void Despawn()
     {
-        if (Application.isPlaying)
-        {
-            foreach (var instance in _instances) { SpawnManager.Despawn(instance.gameObject); }
-            foreach (var despawnEvent in despawnEvents) { despawnEvent.Invoke(this); }
-        }
-        else
-        {
-            foreach (var instance in _instances) { SpawnManager.DespawnImmediate(instance.gameObject); }
-        }
-        _instances.Clear();
+        var playing = Application.isPlaying;
+        if (!playing) { foreach (var instance in instances) { SpawnManager.DespawnImmediate(instance.gameObject); } instances.Clear(); return; }
+        foreach (var instance in instances) { SpawnManager.Despawn(instance.gameObject); }
+        foreach (var despawnEvent in despawnEvents) { despawnEvent.Invoke(this); }
+        instances.Clear();
     }
 
     public void SaveState()
     {
-        for (var i = 0; i < _instances.Count; i++)
+        if (Application.isPlaying) if (!saveStateBetweenStages) return;
+        for (var i = 0; i < instances.Count; i++)
         {
-            objectData[i].position = _instances[i].transform.localPosition;
-            objectData[i].rotation = _instances[i].transform.localRotation;
-            objectData[i].scale = _instances[i].transform.localScale;
+            if (objectData.Count <= i)
+            {
+                objectData.Add(new ObjectData
+                {
+                    prefab = objectData[0].prefab,
+                    position = instances[i].transform.localPosition,
+                    rotation = instances[i].transform.localRotation,
+                    scale = instances[i].transform.localScale
+                });
+                continue;
+            }
+            objectData[i].position = instances[i].transform.localPosition;
+            objectData[i].rotation = instances[i].transform.localRotation;
+            objectData[i].scale = instances[i].transform.localScale;
         }
     }
     
-    public List<StageObject> GetInstances() => _instances;
+    public List<StageObject> GetInstances() => instances;
 }
 
 [Serializable]
@@ -79,5 +85,6 @@ public class ObjectData
 
 public enum ObjectTrait
 {
-    Unlockable
+    Locked,
+    Unlocked
 }

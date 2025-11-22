@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 
-public class Examine : BaseInteraction, ICameraLocker, IPlayerLocker
+public class Examine : BaseInteraction, ICameraLocker, IInputsChanger
 {
     [SerializeField] private Transform cameraPoint;
     private Vector3 _lastCameraLocalPosition;
     
     public CameraConfigurationPreset CameraConfigPreset => GetCameraConfiguration();
+    public InputsType InputsType => InputsType.Interaction;
     
     public override bool IsRelevant(Collider colliderInfo)
     {
@@ -15,17 +16,17 @@ public class Examine : BaseInteraction, ICameraLocker, IPlayerLocker
 
     public override void PerformInteraction()
     {
-        EventService.Invoke(new OnInteractionEventStarted {Preset = this});
+        EventService.Invoke(new OnUiInteractionStarted {InputsType = InputsType, CameraConfigPreset = CameraConfigPreset});
         G.GetManager<PlayerManager>().GetPlayer().Hand.gameObject.SetActive(false);
         GetComponent<IExaminable>()?.Examine();
-        EventService.Subscribe<OnInteractionEventEnded>(EndExamineInteraction);
+        EventService.Subscribe<OnUiInteractionEnded>(EndExamineInteraction);
     }
 
     public override void CancelInteraction() {}
 
-    private void EndExamineInteraction(OnInteractionEventEnded _)
+    private void EndExamineInteraction(OnUiInteractionEnded _)
     {
-        EventService.Unsubscribe<OnInteractionEventEnded>(EndExamineInteraction);
+        EventService.Unsubscribe<OnUiInteractionEnded>(EndExamineInteraction);
         GetComponent<IExaminable>()?.Release();
         G.GetManager<PlayerManager>().GetPlayer().Hand.gameObject.SetActive(true);
     }
@@ -39,4 +40,5 @@ public class Examine : BaseInteraction, ICameraLocker, IPlayerLocker
         preset.CameraLocalRotation = Vector3.forward;
         return preset;
     }
+
 }
