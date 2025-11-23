@@ -6,7 +6,7 @@ using UnityEngine;
 public class InputService : ScriptableObject, IGameService
 {
     private Dictionary<InputsType, string> _actions;
-    private PlayerManager _playerManager;
+    private PlayerInputsManager _playerInputsManager;
 
     public void Run()
     {
@@ -16,11 +16,11 @@ public class InputService : ScriptableObject, IGameService
         EventService.Subscribe<OnUiInteractionEnded>(FreePlayer);
     }
     
-    private void AssignManagers(OnGameStarted obj) { _playerManager = G.GetManager<PlayerManager>(); }
+    private void AssignManagers(OnGameStarted obj) { _playerInputsManager = G.GetManager<PlayerInputsManager>(); }
     private void LockPlayer(OnUiInteractionStarted data) { ChangeInputs(data.InputsType); }
     private void FreePlayer(OnUiInteractionEnded _) => ChangeInputs(InputsType.Player);
 
-    public void ChangeInputs(InputsType type) { _playerManager.GetPlayerInput().SwitchCurrentActionMap(type.ToString()); }
+    public void ChangeInputs(InputsType type) { _playerInputsManager.GetPlayerInput().SwitchCurrentActionMap(type.ToString()); }
 
     public void Stop()
     {
@@ -29,7 +29,7 @@ public class InputService : ScriptableObject, IGameService
         EventService.Unsubscribe<OnUiInteractionEnded>(FreePlayer);
         _actions.Clear();
         _actions = null;
-        _playerManager = null;
+        _playerInputsManager = null;
     }
 }
 

@@ -8,7 +8,7 @@ public class LayDown : BaseInteraction
     public override bool IsRelevant(Collider colliderInfo)
     {
         if (!TryGetRaycastHit()) return false;
-        var player = G.GetManager<PlayerManager>().GetPlayer();
+        var player = G.GetManager<PlayerInputsManager>().GetPlayer();
         if (player.Hand.childCount == 0) return false;
         _layingObject = player.Hand.GetChild(0)?.GetComponent<InteractableObject>() as IGrabable;
         if (_layingObject == null) return false;
@@ -27,7 +27,7 @@ public class LayDown : BaseInteraction
 
     private bool TryGetRaycastHit()
     {
-        var playerManager = G.GetManager<PlayerManager>();
+        var playerManager = G.GetManager<PlayerInputsManager>();
         var cameraTransform = G.GetManager<CameraManager>().GetCameraTransform();
         var ray = new Ray(cameraTransform.position, cameraTransform.forward);
         var layerMask = ~playerManager.GetIgnoredLayers();

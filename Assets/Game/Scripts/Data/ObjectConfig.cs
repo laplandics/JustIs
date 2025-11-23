@@ -25,11 +25,7 @@ public class ObjectConfig
         foreach (var data in objectData)
         {
             var dataPos = data.position;
-            if (cameraPos)
-            {
-                var cameraTr = G.GetManager<CameraManager>().GetCameraTransform();
-                dataPos = cameraTr.position + cameraTr.forward;
-            }
+            if (cameraPos) {var cameraTr = G.GetManager<CameraManager>().GetCameraTransform(); dataPos = cameraTr.position + cameraTr.forward;}
             var instance = SpawnManager.Spawn(data.prefab, dataPos, data.rotation);
             if (instance.TryGetComponent<InteractableObject>(out var interactableObject) && playing) interactableObject.Enable();
             instance.transform.localScale = data.scale;
@@ -43,8 +39,11 @@ public class ObjectConfig
     public void Despawn()
     {
         var playing = Application.isPlaying;
-        if (!playing) { foreach (var instance in instances) { SpawnManager.DespawnImmediate(instance.gameObject); } instances.Clear(); return; }
-        foreach (var instance in instances) { SpawnManager.Despawn(instance.gameObject); }
+        var livingInstances = new List<StageObject>();
+        foreach (var instance in instances) { if (instance != null) livingInstances.Add(instance); }
+        if (!playing) { foreach (var instance in livingInstances) { SpawnManager.DespawnImmediate(instance.gameObject); } instances.Clear(); return; }
+        foreach (var instance in livingInstances) { if (instance.TryGetComponent<InteractableObject>(out var interactableObject)) interactableObject.Disable(); }
+        foreach (var instance in livingInstances) { SpawnManager.Despawn(instance.gameObject); }
         foreach (var despawnEvent in despawnEvents) { despawnEvent.Invoke(this); }
         instances.Clear();
     }

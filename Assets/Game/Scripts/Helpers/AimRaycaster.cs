@@ -27,7 +27,7 @@ public class AimRaycaster : IDisposable
     
     public AimRaycaster()
     {
-        _layerMask = ~G.GetManager<PlayerManager>().GetIgnoredLayers();
+        _layerMask = ~G.GetManager<PlayerInputsManager>().GetIgnoredLayers();
         _rayOrigin = G.GetManager<CameraManager>().GetCameraTransform();
         _routineManager = G.GetManager<RoutineManager>();
         _routineManager.StartUpdateAction(FindTarget);

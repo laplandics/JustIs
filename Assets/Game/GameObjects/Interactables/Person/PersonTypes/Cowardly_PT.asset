@@ -16,5 +16,11 @@ MonoBehaviour:
   triggers:
   - {fileID: 11400000, guid: 140b6ef4aadd5f44baefb5cae6713bf0, type: 2}
   - {fileID: 11400000, guid: 8242ead6a9839da469018a7dc709995b, type: 2}
-  defaultTrust: 0.1
-  defaultFear: 0.65
+  defaultMood: 0.35
+  moodSources:
+  - source: 0
+    impactMultiplier: 0.01
+    maxAmount: 99
+  - source: 1
+    impactMultiplier: 0.001
+    maxAmount: 0.4

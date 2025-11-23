@@ -1,3 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class StageObject : MonoBehaviour {}
+public abstract class StageObject : MonoBehaviour
+{
+    
+}

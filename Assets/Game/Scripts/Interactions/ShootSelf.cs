@@ -15,7 +15,7 @@ public class ShootSelf : BaseInteraction
     public override bool IsRelevant(Collider colliderInfo)
     {
         if (_isChecking) return true;
-        var player = G.GetManager<PlayerManager>().GetPlayer();
+        var player = G.GetManager<PlayerInputsManager>().GetPlayer();
         var hand = player.Hand;
         if (hand.childCount == 0) return false;
         var revolver = hand.GetChild(0).GetComponent<Revolver>();
@@ -25,8 +25,8 @@ public class ShootSelf : BaseInteraction
         _hand = hand;
         _revolver = revolver;
         _cameraTr = G.GetManager<CameraManager>().GetCameraTransform();
-        _layerMask = ~G.GetManager<PlayerManager>().GetIgnoredLayers();
-        _shootSelfPoint = G.GetManager<PlayerManager>().GetPlayer().ShootSelfPoint;
+        _layerMask = ~G.GetManager<PlayerInputsManager>().GetIgnoredLayers();
+        _shootSelfPoint = G.GetManager<PlayerInputsManager>().GetPlayer().ShootSelfPoint;
         
         UpdateUI(true);
         _checkRoutine = G.GetManager<RoutineManager>().StartRoutine(CheckConditions());

@@ -6,16 +6,5 @@ public class OnPersonShotEvent { public Person Person; }
 public class OnMonitorShotEvent {}
 public class OnNewStageObjectSelectedToPrintEvent { public ObjectConfig ObjectConfig; }
 public class OnMonitorUiChangedEvent { public MonitorUiType Command; public Monitor SpecificTarget; }
-public class OnPlayerTalkToPersonEvent { public Person Target; }
-public class OnPersonMoreFearEvent
-{
-    public Person Target;
-    public float FearAmount;
-    public FearSource Source;
-}
-public class OnPersonMoreTrustEvent
-{
-    public Person Target;
-    public float TrustAmount;
-    public TrustSource Source;
-}
+public class OnPlayerTalkToPersonEvent { public Person Person; }
+public class OnPersonMoodChangedEvent {public Person Person; public MoodChangeSource Source; public float Amount;}

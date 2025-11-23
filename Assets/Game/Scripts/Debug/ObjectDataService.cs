@@ -91,8 +91,11 @@ public class ObjectDataService : ScriptableObject, IGameService
         foreach (var obj in configs) { obj.SaveState(); }
         EditorUtility.SetDirty(this);
         AssetDatabase.SaveAssets();
-    } 
-    
+    }
+
+    [Button]
+    private void ClearInstances() { foreach (var config in configs) { config.GetInstances().Clear(); } }
+
     public ObjectConfig[] GetConfigs() { return configs.ToArray(); }
     
     public ObjectConfig[] GetConfigsByStage(Stage stage) => configs.Where(c => c.stages.Contains(stage.StageNum)).ToArray();

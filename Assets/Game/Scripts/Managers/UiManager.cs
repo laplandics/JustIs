@@ -13,7 +13,7 @@ public class UiManager : MonoBehaviour, ISceneManager
     public void Initialize()
     {
         _canvas = SpawnManager.Spawn(canvasPrefab, Vector3.zero, Quaternion.identity, canvasParent);
-        G.GetService<SpecialGameStatesService>().GetState<GlobalCanvasSpawned>().Set(_canvas);
+        DataInjector.InjectState<GlobalCanvasSpawned>().Set(_canvas);
         _targetPoint = _canvas.GetComponentInChildren<Image>();
         EventService.Subscribe<OnUiInteractionStarted>(HideTargetPoint);
         EventService.Subscribe<OnUiInteractionEnded>(ShowTargetPoint);

@@ -17,7 +17,7 @@ public class CameraManager : MonoBehaviour, ISceneManager
     private void AssignCameraToPlayer(OnPlayerSpawnedEvent eventData) { AssignCameraToPlayer(); }
     public Transform GetCameraTransform() => camTr;
     public CinemachineCamera GetCamera() => cmCamera;
-    private void AssignCameraToPlayer() { G.GetManager<PlayerManager>().GetPlayer().SetFpCamera(camTr, this); }
+    private void AssignCameraToPlayer() { G.GetManager<PlayerInputsManager>().GetPlayer().SetFpCamera(camTr, this); }
     public void RotateCamera(Vector3 rotation)
     {
         if (_isCameraLocked) return;

@@ -21,7 +21,7 @@ public class DebugManager : MonoBehaviour, ISceneManager, IInputsChanger
     private void CallDebugConsole(InputAction.CallbackContext _)
     {
         _gameInputs.Debug.CallDebugConsole.performed -= CallDebugConsole;
-        if (_globalCanvas == null) _globalCanvas = G.GetService<SpecialGameStatesService>().GetState<GlobalCanvasSpawned>().Get();
+        if (_globalCanvas == null) _globalCanvas = DataInjector.InjectState<GlobalCanvasSpawned>().Get();
         _console = SpawnManager.Spawn(consolePrefab, Vector3.zero, Quaternion.identity, _globalCanvas.transform);
         var consoleRect = _console.GetComponent<RectTransform>();
         consoleRect.offsetMax = Vector2.zero;

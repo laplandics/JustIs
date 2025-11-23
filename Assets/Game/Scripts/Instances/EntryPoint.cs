@@ -8,8 +8,10 @@ public class EntryPoint : MonoBehaviour
     
     private void Start()
     {
+        Application.quitting += OnEnd;
         InitializeGameServices();
         InitializeSceneManagers();
+        DataInjector.InjectState<IsGameStarted>().Set(true);
         EnableInputs();
     }
 
@@ -35,16 +37,14 @@ public class EntryPoint : MonoBehaviour
             managers.Add(sceneManager);
         }
         G.CacheGameServices(managers);
-        G.GetService<SpecialGameStatesService>().GetState<IsGameStarted>().Set(true);
     }
 
-    private void EnableInputs()
-    {
-        G.GetService<InputService>().ChangeInputs(InputsType.Player);
-    }
+    private void EnableInputs() { G.GetService<InputService>().ChangeInputs(InputsType.Player); }
 
-    private void OnDisable()
+    private void OnEnd()
     {
+        Application.quitting -= OnEnd;
+        DataInjector.InjectState<IsGameStarted>().Set(false);
         DeinitializeSceneManagers();
         StopGameServices();
         G.ResetData();
@@ -57,7 +57,6 @@ public class EntryPoint : MonoBehaviour
             if (manager is not ISceneManager sceneManager) continue;
             sceneManager.Deinitialize();
         }
-        G.GetService<SpecialGameStatesService>().GetState<IsGameStarted>().Set(false);
     }
 
     private void StopGameServices()

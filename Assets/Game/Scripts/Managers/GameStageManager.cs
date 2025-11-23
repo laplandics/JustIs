@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameStageManager : MonoBehaviour, ISceneManager
 {
     private readonly Dictionary<StageNum, Stage> _stages = new();
+    private Coroutine _stageCycleRoutine;
     private Stage _currentStage;
     private bool _isGameInProgress;
     private bool _hasStageChanged;
@@ -15,10 +16,11 @@ public class GameStageManager : MonoBehaviour, ISceneManager
         var stages = gameObject.GetComponentsInChildren<Stage>().ToArray();
         foreach (var stage in stages) { _stages.Add(stage.StageNum, stage); }
         EventService.Subscribe<OnStageEndEvent>(ChangeStage);
+        EventService.Subscribe<OnGameEnded>(DestroyStages);
         _currentStage = _stages[StageNum.StageOne];
     }
 
-    public void BeginCycle() { _isGameInProgress = true; G.GetManager<RoutineManager>().StartRoutine(StageCycle()); }
+    public void BeginCycle() { _isGameInProgress = true; _stageCycleRoutine = G.GetManager<RoutineManager>().StartRoutine(StageCycle()); }
 
     private IEnumerator StageCycle()
     {
@@ -35,17 +37,24 @@ public class GameStageManager : MonoBehaviour, ISceneManager
 
     private void ChangeStage(OnStageEndEvent eventData)
     {
-        if (!_stages.TryGetValue(eventData.NextStage, out var stage)) {EndCycle(); return;}
+        if (!_stages.TryGetValue(eventData.NextStage, out var stage)) {Debug.LogWarning("Stage is not implemented"); return;}
         _currentStage = stage;
         _hasStageChanged = true;
+        if (!_isGameInProgress) _stageCycleRoutine = G.GetManager<RoutineManager>().StartRoutine(StageCycle());
     }
 
-    private void EndCycle() { Debug.Log("This stage is not implemented yet"); }
+    public void EndCycle() {_isGameInProgress = false; if (_stageCycleRoutine != null) G.GetManager<RoutineManager>().EndRoutine(_stageCycleRoutine);}
+
+    private void DestroyStages(OnGameEnded _)
+    {
+        _currentStage.EndStage();
+        _stages.Clear();
+        DataInjector.InjectState<CurrentGameStage>().Set(null);
+    }
     
     public void Deinitialize()
     {
-        _stages.Clear();
-        G.GetService<SpecialGameStatesService>().GetState<CurrentGameStage>().Set(null);
+        EventService.Unsubscribe<OnGameEnded>(DestroyStages);
         EventService.Unsubscribe<OnStageEndEvent>(ChangeStage);
     }
 }

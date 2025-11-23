@@ -10,30 +10,15 @@ public abstract class Stage : MonoBehaviour
     
     public virtual void StartStage()
     {
-        G.GetService<SpecialGameStatesService>().GetState<CurrentGameStage>().Set(this);
-        SpawnStage();
-    }
-
-    public virtual void EndStage()
-    {
-        DespawnStage();
-    }
-    
-    private void SpawnStage()
-    {
+        DataInjector.InjectState<CurrentGameStage>().Set(this);
         stageObjects = G.GetService<ObjectDataService>().GetConfigsByStage(this);
         foreach (var stageObject in stageObjects) { stageObject.Spawn(); }
         EventService.Invoke(new OnStageLoadEvent());
     }
 
-    private void DespawnStage()
+    public virtual void EndStage()
     {
         foreach (var stageObject in stageObjects) { stageObject.SaveState(); }
         foreach (var config in G.GetService<ObjectDataService>().GetConfigs()) { config.Despawn(); }
-    }
-
-    private void OnDestroy()
-    {
-        foreach (var stageObject in stageObjects) { stageObject.GetInstances().Clear(); }
     }
 }

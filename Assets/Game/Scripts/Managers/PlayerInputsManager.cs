@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerManager : MonoBehaviour, ISceneManager
+public class PlayerInputsManager : MonoBehaviour, ISceneManager
 {
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private LayerMask ignoredLayers;
@@ -35,7 +35,7 @@ public class PlayerManager : MonoBehaviour, ISceneManager
     private void UnsubscribeCamera()
     {
         var cameraManager = G.GetManager<CameraManager>();
-        if (cameraManager != null) _player.FreeFpCamera(cameraManager);
+        if (cameraManager != null) _player?.FreeFpCamera(cameraManager);
     }
     
     private void OnMove(InputValue value)

@@ -12,7 +12,7 @@ public class ComputerUIHandler : MonoBehaviour
     
     public void InitializeUi(Computer computer)
     {
-        var currentStage = G.GetService<SpecialGameStatesService>().GetState<CurrentGameStage>().Get();
+        var currentStage = DataInjector.InjectState<CurrentGameStage>().Get();
         var stageObjects = currentStage.StageObjects;
         var unlockableObjects = stageObjects.Where(o => o.traits.Contains(ObjectTrait.Locked) || o.traits.Contains(ObjectTrait.Unlocked)).ToList();
         foreach (var unlockableObject in unlockableObjects)

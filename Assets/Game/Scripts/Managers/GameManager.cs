@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour, ISceneManager
     
     public void Deinitialize()
     {
+        G.GetManager<GameStageManager>().EndCycle();
         G.GetManager<UiManager>().ShowCursor();
     }
 }

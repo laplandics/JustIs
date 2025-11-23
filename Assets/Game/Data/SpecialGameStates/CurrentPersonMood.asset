@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf6c450c80524729b556f0f57cea3327, type: 3}
-  m_Name: CurrentPersonTrustFearAmount
+  m_Name: CurrentPersonMood
   m_EditorClassIdentifier: Assembly-CSharp::CurrentPersonTrustFearAmount
   value1: {fileID: 0}
   value2: 0

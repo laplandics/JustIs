@@ -202,20 +202,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a258733df054755b1fc97cf789ff923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  id: 
-  position: {x: 0, y: 0, z: 3.516}
-  rotation: {x: 0, y: 1, z: 0, w: 0}
-  scale: {x: 1, y: 1, z: 1}
-  onLoadEvent: {fileID: 11400000, guid: d0758bc356f4b1b4bbc777ef9fcbe888, type: 2}
-  onUnloadEvent: {fileID: 11400000, guid: aa168fa73f63a334fa2583d71ba78f43, type: 2}
-  load: 1
-  traits: 
-  excludeStages: 
-  instance: {fileID: 0}
   cameraPoint: {fileID: 3931242805470674818}
   playerController: {fileID: 5501632724649478143}
   hand: {fileID: 1228415463856724251}
   shootSelfPoint: {fileID: 1480618182127555850}
+  playerVisual: {fileID: 8686760191412526450}
 --- !u!143 &5501632724649478143
 CharacterController:
   m_ObjectHideFlags: 0

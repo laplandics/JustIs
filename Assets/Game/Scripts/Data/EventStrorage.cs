@@ -7,3 +7,4 @@ public class OnUiInteractionStarted { public InputsType InputsType; public Camer
 public class OnUiInteractionEnded {}
 public class OnUpdateUIEvent { public Sprite Sprite; }
 public class OnSomeStateChangedEvent { public SpecialGameState State; }
+public class OnGameEnded {}

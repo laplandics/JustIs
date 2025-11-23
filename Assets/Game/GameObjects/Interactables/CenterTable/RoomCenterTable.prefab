@@ -51,8 +51,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 0.8284704, z: 1.0415572}
-  m_Center: {x: 0, y: 0.4142352, z: 0}
+  m_Size: {x: 2, y: 0.10316378, z: 1.0415572}
+  m_Center: {x: 0, y: 0.7768886, z: 0}
 --- !u!1001 &3341307530151002344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168,16 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd59fcbd117a30c42932625901d09d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Surface
-  id: 
-  position: {x: 0, y: 0, z: -1.42}
-  rotation: {x: 0, y: 0, z: 0, w: 1}
-  scale: {x: 1, y: 1, z: 1}
-  onLoadEvent: {fileID: 0}
-  onUnloadEvent: {fileID: 0}
-  load: 1
-  traits: 
-  excludeStages: 
-  instance: {fileID: 0}
 --- !u!114 &-1768586218207474392
 MonoBehaviour:
   m_ObjectHideFlags: 0

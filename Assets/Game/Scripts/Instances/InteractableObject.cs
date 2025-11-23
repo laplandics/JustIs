@@ -49,7 +49,7 @@ public abstract class InteractableObject : StageObject
         return interaction;
     }
 
-    private void OnDestroy()
+    public virtual void Disable()
     {
         foreach (var preset in _presets.Values) { preset.Reset(); }
         _presets.Clear();

@@ -10,7 +10,7 @@ public class Shoot : BaseInteraction
 
     public override bool IsRelevant(Collider colliderInfo)
     {
-        var hand = G.GetManager<PlayerManager>().GetPlayer().Hand;
+        var hand = G.GetManager<PlayerInputsManager>().GetPlayer().Hand;
         if (hand.childCount == 0) return false;
         
         _revolver = hand.GetChild(0).gameObject.GetComponent<Revolver>();

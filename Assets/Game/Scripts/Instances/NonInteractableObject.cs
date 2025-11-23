@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class NonInteractableObject : StageObject
+﻿public class NonInteractableObject : StageObject
 {
     
 }

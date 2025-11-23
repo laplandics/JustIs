@@ -6,12 +6,15 @@ public class Player : StageObject
     [SerializeField] private CharacterController playerController;
     [SerializeField] private Transform hand;
     [SerializeField] private Transform shootSelfPoint;
+    [SerializeField] private MeshRenderer playerVisual;
     private Transform _camera;
 
     public CharacterController Controller => playerController;
     public Transform Hand => hand;
     public Transform ShootSelfPoint => shootSelfPoint;
 
+    public void SetVisual(bool isVisible) { playerVisual.enabled = isVisible; }
+    
     public void SetFpCamera(Transform fpCamera, CameraManager manager)
     {
         _camera = fpCamera;

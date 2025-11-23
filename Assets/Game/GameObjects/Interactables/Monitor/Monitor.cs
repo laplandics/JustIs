@@ -18,7 +18,6 @@ public class Monitor : InteractableObject, IShootable
     private bool _firstShootAttempt = true;
     private MonitorUiType _savedUiType = MonitorUiType.Error;
     private MonitorUIChanger _uIChanger;
-    private CurrentMonitorUi _stateData;
 
     public bool IsMonitorBroken {get; private set;}
     
@@ -26,33 +25,34 @@ public class Monitor : InteractableObject, IShootable
     {
         _uIChanger = new MonitorUIChanger(this);
         EventService.Subscribe<OnMonitorUiChangedEvent>(_uIChanger.SetMonitorUi);
-        _stateData = G.GetService<SpecialGameStatesService>().GetState<CurrentMonitorUi>();
-        _stateData.Set(MonitorUiType.Error);
+        DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.Error);
     }
 
     public void TakeAim(float time, out bool isShot)
     {
         isShot = false;
         if (IsMonitorBroken) {isShot = true; return;}
-        if (_firstShootAttempt) _savedUiType = _stateData.Get<MonitorUiType>();
+        if (_firstShootAttempt) _savedUiType = DataInjector.InjectState<CurrentMonitorUi>().Get<MonitorUiType>();
         _firstShootAttempt = false;
-        _stateData.Set(MonitorUiType.ShouldNotShootMonitor);
+        DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.ShouldNotShootMonitor);
         if (!(time >= timeToShoot)) return;
         isShot = true;
-        _stateData.Set(MonitorUiType.Error, this);
+        DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.Error, this);
         IsMonitorBroken = true;
-        _stateData.Set(MonitorUiType.GoodJob);
+        DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.GoodJob);
         EventService.Invoke(new OnMonitorShotEvent());
     }
 
     public void ReleaseAim()
     {
-        _stateData.Set(_savedUiType);
+        DataInjector.InjectState<CurrentMonitorUi>().Set(_savedUiType);
         _firstShootAttempt = true;
     }
 
-    private void OnDestroy()
+    public override void Disable()
     {
+        DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.Error);
         EventService.Unsubscribe<OnMonitorUiChangedEvent>(_uIChanger.SetMonitorUi);
+        base.Disable();
     }
 }

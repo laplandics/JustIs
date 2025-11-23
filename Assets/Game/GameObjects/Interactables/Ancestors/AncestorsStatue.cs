@@ -17,6 +17,7 @@ public class AncestorsStatue : InteractableObject, IExaminable, IGrabable
     public void Examine()
     {
         examineUi.gameObject.SetActive(true);
+        Debug.Log(Story.Ancestors.FirstExamine);
     }
 
     public void Release()

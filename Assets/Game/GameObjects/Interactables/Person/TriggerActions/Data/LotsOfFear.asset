@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LotsOfFearTriggerAction
   state: {fileID: 11400000, guid: 8ec00ae9aa9bc2a458e26e9dd4025cf7, type: 2}
   targetPerson: {fileID: 0}
-  maxFear: 0.6
+  triggerTrustAmount: 0.2

@@ -11,24 +11,24 @@
     
     private void FirstPart(OnStageLoadEvent _)
     {
-        G.GetService<SpecialGameStatesService>().GetState<CurrentMonitorUi>().Set(MonitorUiType.ShouldReadTablet);
+        DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.ShouldReadTablet);
     }
 
     private void SecondPart(OnTabletExaminedEvent _)
     {
-        G.GetService<SpecialGameStatesService>().GetState<CurrentMonitorUi>().Set(MonitorUiType.ShouldGrabRevolver);
+        DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.ShouldGrabRevolver);
     }
 
     private void ThirdPart(OnRevolverGrabStatusChanged eventData)
     {
         var uiType = eventData.IsGrabbed ? MonitorUiType.ShouldShootPerson : MonitorUiType.ShouldGrabRevolver;
-        G.GetService<SpecialGameStatesService>().GetState<CurrentMonitorUi>().Set(uiType);
+        DataInjector.InjectState<CurrentMonitorUi>().Set(uiType);
     }
 
     private void FourthPart(OnPersonShotEvent _)
     {
         
-        G.GetService<SpecialGameStatesService>().GetState<CurrentMonitorUi>().Set(MonitorUiType.GoodJob);
+        DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.GoodJob);
         EventService.Invoke(new OnStageEndEvent { NextStage = StageNum.StageTwo });
     }
 

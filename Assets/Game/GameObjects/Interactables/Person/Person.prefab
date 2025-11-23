@@ -3134,6 +3134,7 @@ GameObject:
   - component: {fileID: 2187296701837037166}
   - component: {fileID: 1166804387199339827}
   - component: {fileID: 6008209407395124020}
+  - component: {fileID: 2463802055173276989}
   m_Layer: 6
   m_Name: Person
   m_TagString: Untagged
@@ -3201,7 +3202,7 @@ MonoBehaviour:
   visual: {fileID: 7123956750012009872}
   timeToShoot: 0.8
   uiHandler: {fileID: 6008209407395124020}
-  fromSourceMaxAmount: 0.2
+  moodHandler: {fileID: 2463802055173276989}
 --- !u!114 &2187296701837037166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3247,7 +3248,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PersonUIHandler
   trustIndicator: {fileID: 7972314807089348180}
-  fearIndicator: {fileID: 4329053436943233110}
+--- !u!114 &2463802055173276989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5790201271064404297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1609bd500802424db412df83c76bf169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PersonMood
+  moodSources:
+  - source: 0
+    impactMultiplier: 0.01
+    maxAmount: 99999
+  - source: 1
+    impactMultiplier: 0.001
+    maxAmount: 0.3
 --- !u!1 &5836546147632674719
 GameObject:
   m_ObjectHideFlags: 0
@@ -3367,8 +3386,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6891829945660990448}
   - {fileID: 460999879801730760}
+  - {fileID: 6891829945660990448}
   m_Father: {fileID: 1565687649693427156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -3397,7 +3416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.45817018, g: 0.629486, b: 0.8301887, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3658,11 +3677,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 2413f3fab8164a746b86c463eb61e188, type: 3}
-  m_Type: 3
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.5
+  m_FillAmount: 1
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0

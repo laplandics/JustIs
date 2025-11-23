@@ -8,4 +8,10 @@ public class Printer : InteractableObject
     }
 
     private void ChangeSelectedObject(OnNewStageObjectSelectedToPrintEvent eventData) { SelectedObject = eventData.ObjectConfig; }
+
+    public override void Disable()
+    {
+        EventService.Unsubscribe<OnNewStageObjectSelectedToPrintEvent>(ChangeSelectedObject);
+        base.Disable();
+    }
 }

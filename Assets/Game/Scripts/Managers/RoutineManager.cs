@@ -10,6 +10,7 @@ public class RoutineManager : MonoBehaviour, ISceneManager
     private readonly List<Action> _lateUpdateActions = new();
 
     public void Initialize() {}
+    
     public Coroutine StartRoutine(IEnumerator routine) {var newRoutine = StartCoroutine(routine); return newRoutine;}
     public void EndRoutine(Coroutine coroutine) {StopCoroutine(coroutine);}
     public void StartUpdateAction(Action action) => _updateActions.Add(action);
@@ -22,8 +23,6 @@ public class RoutineManager : MonoBehaviour, ISceneManager
     private void Update() {foreach (var action in _updateActions){action?.Invoke();}}
     private void FixedUpdate(){foreach (var action in _fixedUpdateActions){action?.Invoke();}}
     private void LateUpdate(){foreach (var action in _lateUpdateActions){action?.Invoke();}}
-
-    public void Deinitialize() { _updateActions.Clear(); _fixedUpdateActions.Clear(); _lateUpdateActions.Clear(); }
     
-    private void OnDestroy() { StopAllCoroutines(); }
+    public void Deinitialize() { StopAllCoroutines(); _updateActions.Clear(); _fixedUpdateActions.Clear(); _lateUpdateActions.Clear(); }
 }

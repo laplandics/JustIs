@@ -3,19 +3,19 @@
 [CreateAssetMenu(fileName = "LotsOfFear", menuName = "GameData/TriggerActions/LotsOfFear")]
 public class LotsOfFearTriggerAction : TriggerAction
 {
-    [SerializeField] private float maxFear;
+    [SerializeField] private float triggerTrustAmount;
     
     public override void PrepareToPerform()
     {
-        var trustFear = G.GetService<SpecialGameStatesService>().GetState<CurrentPersonTrustFearAmount>().Get<(float, float)>();
-        ReadyToPerform = trustFear.Item1 >= maxFear;
+        var mood = DataInjector.InjectState<CurrentPersonMood>().Get<float>();
+        ReadyToPerform = mood <= triggerTrustAmount;
         EventService.Unsubscribe<OnPlayerTalkToPersonEvent>(Perform);
         EventService.Subscribe<OnPlayerTalkToPersonEvent>(Perform);
     }
 
     private void Perform(OnPlayerTalkToPersonEvent eventData)
     {
-        if (!ReadyToPerform || eventData.Target != targetPerson) return;
-        Debug.Log("Слишком боится");
+        if (!ReadyToPerform || eventData.Person != targetPerson) return;
+        Debug.Log("Person is too terrified to talk");
     }
 }

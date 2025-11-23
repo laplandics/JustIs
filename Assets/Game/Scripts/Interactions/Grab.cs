@@ -6,7 +6,7 @@ public class Grab : BaseInteraction
     
     public override bool IsRelevant(Collider colliderInfo)
     {
-        _target = G.GetManager<PlayerManager>().GetPlayer().Hand;
+        _target = G.GetManager<PlayerInputsManager>().GetPlayer().Hand;
         if (_target.transform.childCount > 0) return false;
         if (!base.IsRelevant(colliderInfo)) { return false; }
         UpdateUI(true);

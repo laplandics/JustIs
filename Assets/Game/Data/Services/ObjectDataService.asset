@@ -162,7 +162,7 @@ MonoBehaviour:
     traits: 
     spawnEvents: []
     despawnEvents: []
-    stages: 0200000001000000
+    stages: 0100000002000000
     saveStateBetweenStages: 0
     instances: []
   - name: RoomShelf_CO
