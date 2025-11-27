@@ -1,5 +1,7 @@
-﻿public interface IGameService
+﻿using System.Collections;
+
+public interface IGameService
 {
-    public void Run();
+    public IEnumerator Run();
     public void Stop();
 }

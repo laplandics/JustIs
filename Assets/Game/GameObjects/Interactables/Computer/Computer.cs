@@ -1,29 +1,40 @@
+using System.Collections;
 using UnityEngine;
 
 public class Computer : InteractableObject, IExaminable
 {
-    [SerializeField] private Canvas examineUi;
+    [SerializeField] private Canvas ui;
     [SerializeField] private Transform visual;
     [SerializeField] private ComputerUIHandler computerUIHandler;
-    
-    public Canvas ExamineUi => examineUi;
+    [SerializeField] private Transform textContainer;
+    private bool _isExamining;
+
+    public Transform TextContainer => textContainer;
+    public Canvas UI => ui;
     public Transform Visual => visual;
     public void Examine()
     {
-        examineUi.gameObject.SetActive(true);
+        _isExamining = true;
+        ui.gameObject.SetActive(true);
         computerUIHandler.InitializeUi(this);
+        G.GetManager<RoutineManager>().StartRoutine(ExamineRoutine());
     }
 
-    public void MarkObject(ObjectConfig config)
+    public IEnumerator ExamineRoutine()
     {
-        config.traits.Remove(ObjectTrait.Locked);
-        config.traits.Add(ObjectTrait.Unlocked);
-        EventService.Invoke(new OnNewStageObjectSelectedToPrintEvent {ObjectConfig = config});
+        yield return new WaitUntil(() => !_isExamining);
     }
 
     public void Release()
     {
+        _isExamining = false;
         computerUIHandler.DeInitializeUi();
-        examineUi.gameObject.SetActive(false);
+        ui.gameObject.SetActive(false);
+    }
+
+    public void MarkObject(ObjectConfig config)
+    {
+        if (config.traits.Contains(ObjectTrait.Locked)) {config.traits.Remove(ObjectTrait.Locked); config.traits.Add(ObjectTrait.Unlocked);}
+        EventService.Invoke(new ConfigEvents.Computer_NewObjectSelectedToPrintEvent {ObjectConfig = config});
     }
 }

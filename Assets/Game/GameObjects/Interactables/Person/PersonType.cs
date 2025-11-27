@@ -14,15 +14,17 @@ public class PersonType : ScriptableObject
     [SerializeField] private SourceMoodSettings[] moodSources;
     private readonly Dictionary<MoodChangeSource, SourceMoodSettings> _moodSettings = new();
 
+    public static List<string> FirstMetLines => new() { Story.Person.FirstMeet };
+    
     public void Initialize(Person person)
     {
         _person = person;
-        foreach (var source in moodSources) {_moodSettings.Add(source.source, source);}
+        foreach (var source in moodSources) {_moodSettings.TryAdd(source.source, source);}
         foreach (var trigger in triggers) { trigger.targetPerson = _person; }
-        EventService.Subscribe<OnSomeStateChangedEvent>(CatchSomeStateInvocation);
+        EventService.Subscribe<StateEvents.OnSomeStateChangedEvent>(CatchSomeStateInvocation);
     }
 
-    private void CatchSomeStateInvocation(OnSomeStateChangedEvent eventData)
+    private void CatchSomeStateInvocation(StateEvents.OnSomeStateChangedEvent eventData)
     {
         foreach (var trigger in triggers) { if (trigger.state == eventData.State) trigger.PrepareToPerform(); }
     }
@@ -34,7 +36,7 @@ public class PersonType : ScriptableObject
         _moodSettings.Clear();
         _person = null;
         foreach (var trigger in triggers) { trigger.Reset(); }
-        EventService.Unsubscribe<OnSomeStateChangedEvent>(CatchSomeStateInvocation);
+        EventService.Unsubscribe<StateEvents.OnSomeStateChangedEvent>(CatchSomeStateInvocation);
     }
 }
 

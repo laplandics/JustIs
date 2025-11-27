@@ -23,7 +23,7 @@ public abstract class BaseInteraction : MonoBehaviour, IInteractionPreset
 
     public virtual void CancelInteraction() {}
 
-    public virtual void UpdateUI(bool showUI) => EventService.Invoke(new OnUpdateUIEvent {Sprite = showUI ? TargetSprite : null});
+    public virtual void UpdateUI(bool showUI) => EventService.Invoke(new UiEvents.OnUpdateUIEvent {Sprite = showUI ? TargetSprite : null});
 
     public virtual void Reset() => UpdateUI(false);
 }

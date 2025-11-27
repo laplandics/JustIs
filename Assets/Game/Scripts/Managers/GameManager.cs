@@ -5,18 +5,18 @@ public class GameManager : MonoBehaviour, ISceneManager
 {
     public void Initialize()
     {
-        Subscribe<OnGameStarted>(StartGame);
+        Subscribe<GameEvents.OnGameStarted>(StartGame);
     }
 
-    private void StartGame(OnGameStarted eventData)
+    private void StartGame(GameEvents.OnGameStarted eventData)
     {
         G.GetManager<GameStageManager>().BeginCycle();
-        G.GetManager<UiManager>().HideCursor();
+        UiManager.HideCursor();
     }
     
     public void Deinitialize()
     {
         G.GetManager<GameStageManager>().EndCycle();
-        G.GetManager<UiManager>().ShowCursor();
+        UiManager.ShowCursor();
     }
 }

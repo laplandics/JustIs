@@ -26,7 +26,7 @@ public class DebugManager : MonoBehaviour, ISceneManager, IInputsChanger
         var consoleRect = _console.GetComponent<RectTransform>();
         consoleRect.offsetMax = Vector2.zero;
         consoleRect.offsetMin = Vector2.zero;
-        EventService.Invoke(new OnUiInteractionStarted {InputsType = InputsType, CameraConfigPreset = null});
+        EventService.Invoke(new UiEvents.OnUiInteractionStarted {InputsType = InputsType, CameraConfigPreset = null});
         _gameInputs.Debug.ConfirmConsoleCommand.performed += RegisterConsoleInput;
         _gameInputs.Debug.CallDebugConsole.performed += HideDebugConsole;
     }
@@ -44,7 +44,7 @@ public class DebugManager : MonoBehaviour, ISceneManager, IInputsChanger
         _gameInputs.Debug.CallDebugConsole.performed -= HideDebugConsole;
         SpawnManager.Despawn(_console.gameObject);
         _console = null;
-        EventService.Invoke(new OnUiInteractionEnded());
+        EventService.Invoke(new UiEvents.OnUiInteractionEnded());
         _gameInputs.Debug.CallDebugConsole.performed += CallDebugConsole;
     }
 
@@ -53,6 +53,7 @@ public class DebugManager : MonoBehaviour, ISceneManager, IInputsChanger
         _gameInputs.Debug.CallDebugConsole.performed -= CallDebugConsole;
         _gameInputs.Debug.CallDebugConsole.performed -= HideDebugConsole;
         _gameInputs.Debug.ConfirmConsoleCommand.performed -= RegisterConsoleInput;
+        _gameInputs.Debug.Disable();
     }
 
 }

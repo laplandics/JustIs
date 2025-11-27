@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class SpecialGameStatesService : ScriptableObject, IGameService
     [SerializeField] private SpecialGameState[] states;
     private Dictionary<Type, SpecialGameState> _states;
 
-    public void Run() { LoadStates(); }
+    public IEnumerator Run() { LoadStates(); yield break; }
 
     private void LoadStates()
     {
@@ -23,5 +24,5 @@ public class SpecialGameStatesService : ScriptableObject, IGameService
         return null;
     }
 
-    public void Stop() {_states = null;}
+    public void Stop() { _states = null; }
 }

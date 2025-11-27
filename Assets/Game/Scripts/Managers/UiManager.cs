@@ -1,55 +1,78 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour, ISceneManager
 {
     [SerializeField] private Canvas canvasPrefab;
     [SerializeField] private Transform canvasParent;
+    
+    [Header("Examine UI Elements")]
+    [SerializeField] private GameObject examineTextPrefab;
+    [SerializeField] private GameObject examineChoicePrefab;
+    [SerializeField] private GameObject examineChoiceButtonPrefab;
+    
     private InteractableObject _interactable;
     private Canvas _canvas;
-    private Image _targetPoint;
-    private bool _hideTargetPoint;
+    private UiTarget _uiTarget;
 
     public void Initialize()
     {
         _canvas = SpawnManager.Spawn(canvasPrefab, Vector3.zero, Quaternion.identity, canvasParent);
+        var targetPoint = _canvas.GetComponentInChildren<Image>();
+        _uiTarget = new UiTarget(targetPoint);
         DataInjector.InjectState<GlobalCanvasSpawned>().Set(_canvas);
-        _targetPoint = _canvas.GetComponentInChildren<Image>();
-        EventService.Subscribe<OnUiInteractionStarted>(HideTargetPoint);
-        EventService.Subscribe<OnUiInteractionEnded>(ShowTargetPoint);
-        EventService.Subscribe<OnUpdateUIEvent>(UpdateTargetPoint);
     }
 
-    public void HideCursor()
+    public static void HideCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    public void ShowCursor()
+    public static void ShowCursor()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
-    
-    private void HideTargetPoint(OnUiInteractionStarted _) { ResetTargetPoint(); ShowCursor(); _hideTargetPoint = true; }
-    private void ResetTargetPoint() { _targetPoint.color = Color.clear; }
-    private void ShowTargetPoint(OnUiInteractionEnded _) { HideCursor(); _hideTargetPoint = false; }
 
-    private void UpdateTargetPoint(OnUpdateUIEvent eventData)
+    public List<TMP_Text> SpawnExamineTexts(List<string> texts, Transform parent)
     {
-        if (_hideTargetPoint) return;
-        if (!_targetPoint) return;
-        if (eventData.Sprite == null) {ResetTargetPoint(); return;}
-        _targetPoint.sprite = eventData.Sprite;
-        _targetPoint.color = Color.white;
+        var result = new List<TMP_Text>();
+        foreach (var text in texts)
+        {
+            var textObject = SpawnManager.Spawn(examineTextPrefab, Vector3.zero, Quaternion.identity, parent);
+            textObject.transform.localPosition = Vector3.zero;
+            var tmpText = textObject.GetComponent<TMP_Text>();
+            tmpText.text = text;
+            result.Add(tmpText);
+        }
+        return result;
+    }
+
+    public List<Button> SpawnExamineChoices(List<string> choices, Transform parent, out GameObject container)
+    {
+        container = null;
+        return new List<Button>();
+    }
+
+    public void DespawnExamineElements(List<GameObject> elements)
+    {
+        foreach (var element in elements) { SpawnManager.Despawn(element); }
+        elements.Clear();
+    }
+    
+    public void DespawnExamineElement(GameObject element)
+    {
+        
     }
     
     public void Deinitialize()
     {
-        EventService.Unsubscribe<OnUiInteractionStarted>(HideTargetPoint);
-        EventService.Unsubscribe<OnUiInteractionEnded>(ShowTargetPoint);
+        
+        _uiTarget.Dispose();
+        _uiTarget = null;
         _canvas = null;
-        _targetPoint = null;
     }
 }

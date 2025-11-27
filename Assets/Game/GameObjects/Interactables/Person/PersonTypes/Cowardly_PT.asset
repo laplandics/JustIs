@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a0ba21520b6324c9bbc58f686e5b69, type: 3}
   m_Name: Cowardly_PT
   m_EditorClassIdentifier: Assembly-CSharp::PersonType
-  typeStage: 1
+  typeStage: 0
   triggers:
   - {fileID: 11400000, guid: 140b6ef4aadd5f44baefb5cae6713bf0, type: 2}
   - {fileID: 11400000, guid: 8242ead6a9839da469018a7dc709995b, type: 2}

@@ -22,7 +22,7 @@ public class MonitorUIChanger
         _blackMonitor = monitor.blackMonitor;
     }
     
-    public void SetMonitorUi(OnMonitorUiChangedEvent eventData)
+    public void SetMonitorUi(ConfigEvents.Monitor_UiChangedEvent eventData)
     {
         if (eventData.SpecificTarget != null && eventData.SpecificTarget != _monitor) return;
         if (_monitor.IsMonitorBroken) return;

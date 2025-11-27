@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5160961, y: 4.6853347, z: 0.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -124,13 +124,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0044759abcd1431abe8ce1b1ba6e90b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NonInteractableObject
-  id: 
-  position: {x: 2.539, y: 1.5635, z: -1.068}
-  rotation: {x: 0, y: 0, z: 0, w: 1}
-  scale: {x: 1.5160961, y: 3.2183797, z: 0.05}
-  onLoadEvent: {fileID: 0}
-  onUnloadEvent: {fileID: 0}
-  load: 1
-  traits: 
-  excludeStages: 
-  instance: {fileID: 0}

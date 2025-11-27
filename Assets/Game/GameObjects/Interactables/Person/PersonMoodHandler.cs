@@ -8,7 +8,7 @@ public class PersonMoodHandler : MonoBehaviour
     private Person _person;
     private PersonType _currentPersonType;
     private readonly Dictionary<MoodChangeSource, float> _moodSources = new();
-    private OnPersonMoodChangedEvent _internalMoodEvent = new();
+    private ConfigEvents.Person_MoodChangedEvent _internalMoodEvent = new();
     private float _currentMood;
     private bool _isInitialized;
     private Coroutine _defaultMoodChangeRoutine;
@@ -19,7 +19,7 @@ public class PersonMoodHandler : MonoBehaviour
         _person = GetComponent<Person>();
         _currentPersonType = _person.CurrentPersonType;
         _currentMood = _currentPersonType.defaultMood;
-        EventService.Subscribe<OnPersonMoodChangedEvent>(UpdateMood);
+        EventService.Subscribe<ConfigEvents.Person_MoodChangedEvent>(UpdateMood);
         DataInjector.InjectState<CurrentPersonMood>().Set(_person, _currentMood);
         _defaultMoodChangeRoutine = G.GetManager<RoutineManager>().StartRoutine(DefaultMoodChangeRoutine());
     }
@@ -44,7 +44,7 @@ public class PersonMoodHandler : MonoBehaviour
         EventService.Invoke(_internalMoodEvent);
     }
     
-    private void UpdateMood(OnPersonMoodChangedEvent eventData)
+    private void UpdateMood(ConfigEvents.Person_MoodChangedEvent eventData)
     {
         if (eventData.Person != _person) return;
         var source = eventData.Source;
@@ -63,11 +63,10 @@ public class PersonMoodHandler : MonoBehaviour
     {
         _isInitialized = false;
         if (_defaultMoodChangeRoutine != null) G.GetManager<RoutineManager>().EndRoutine(_defaultMoodChangeRoutine);
-        DataInjector.InjectState<CurrentPersonMood>().Set(null);
         _currentPersonType = null;
         _person = null;
         _moodSources.Clear();
-        _internalMoodEvent = new OnPersonMoodChangedEvent();
-        EventService.Unsubscribe<OnPersonMoodChangedEvent>(UpdateMood);
+        _internalMoodEvent = new ConfigEvents.Person_MoodChangedEvent();
+        EventService.Unsubscribe<ConfigEvents.Person_MoodChangedEvent>(UpdateMood);
     }
 }

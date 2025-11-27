@@ -4,14 +4,14 @@ public class Printer : InteractableObject
     
     protected override void Launch()
     {
-        EventService.Subscribe<OnNewStageObjectSelectedToPrintEvent>(ChangeSelectedObject);
+        EventService.Subscribe<ConfigEvents.Computer_NewObjectSelectedToPrintEvent>(ChangeSelectedObject);
     }
 
-    private void ChangeSelectedObject(OnNewStageObjectSelectedToPrintEvent eventData) { SelectedObject = eventData.ObjectConfig; }
+    private void ChangeSelectedObject(ConfigEvents.Computer_NewObjectSelectedToPrintEvent eventData) { SelectedObject = eventData.ObjectConfig; }
 
     public override void Disable()
     {
-        EventService.Unsubscribe<OnNewStageObjectSelectedToPrintEvent>(ChangeSelectedObject);
+        EventService.Unsubscribe<ConfigEvents.Computer_NewObjectSelectedToPrintEvent>(ChangeSelectedObject);
         base.Disable();
     }
 }

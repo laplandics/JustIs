@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,25 +9,26 @@ public class InputService : ScriptableObject, IGameService
     private Dictionary<InputsType, string> _actions;
     private PlayerInputsManager _playerInputsManager;
 
-    public void Run()
+    public IEnumerator Run()
     {
         _actions = new Dictionary<InputsType, string>();
-        EventService.Subscribe<OnGameStarted>(AssignManagers);
-        EventService.Subscribe<OnUiInteractionStarted>(LockPlayer);
-        EventService.Subscribe<OnUiInteractionEnded>(FreePlayer);
+        EventService.Subscribe<GameEvents.OnGameStarted>(AssignManagers);
+        EventService.Subscribe<UiEvents.OnUiInteractionStarted>(LockPlayer);
+        EventService.Subscribe<UiEvents.OnUiInteractionEnded>(FreePlayer);
+        yield break;
     }
     
-    private void AssignManagers(OnGameStarted obj) { _playerInputsManager = G.GetManager<PlayerInputsManager>(); }
-    private void LockPlayer(OnUiInteractionStarted data) { ChangeInputs(data.InputsType); }
-    private void FreePlayer(OnUiInteractionEnded _) => ChangeInputs(InputsType.Player);
+    private void AssignManagers(GameEvents.OnGameStarted obj) { _playerInputsManager = G.GetManager<PlayerInputsManager>(); }
+    private void LockPlayer(UiEvents.OnUiInteractionStarted data) { ChangeInputs(data.InputsType); }
+    private void FreePlayer(UiEvents.OnUiInteractionEnded _) => ChangeInputs(InputsType.Player);
 
     public void ChangeInputs(InputsType type) { _playerInputsManager.GetPlayerInput().SwitchCurrentActionMap(type.ToString()); }
 
     public void Stop()
     {
-        EventService.Unsubscribe<OnGameStarted>(AssignManagers);
-        EventService.Unsubscribe<OnUiInteractionStarted>(LockPlayer);
-        EventService.Unsubscribe<OnUiInteractionEnded>(FreePlayer);
+        EventService.Unsubscribe<GameEvents.OnGameStarted>(AssignManagers);
+        EventService.Unsubscribe<UiEvents.OnUiInteractionStarted>(LockPlayer);
+        EventService.Unsubscribe<UiEvents.OnUiInteractionEnded>(FreePlayer);
         _actions.Clear();
         _actions = null;
         _playerInputsManager = null;

@@ -15,8 +15,8 @@ public class GameStageManager : MonoBehaviour, ISceneManager
     {
         var stages = gameObject.GetComponentsInChildren<Stage>().ToArray();
         foreach (var stage in stages) { _stages.Add(stage.StageNum, stage); }
-        EventService.Subscribe<OnStageEndEvent>(ChangeStage);
-        EventService.Subscribe<OnGameEnded>(DestroyStages);
+        EventService.Subscribe<StageEvents.OnStageEndEvent>(ChangeStage);
+        EventService.Subscribe<GameEvents.OnGameEnded>(DestroyStages);
         _currentStage = _stages[StageNum.StageOne];
     }
 
@@ -35,7 +35,7 @@ public class GameStageManager : MonoBehaviour, ISceneManager
         }
     }
 
-    private void ChangeStage(OnStageEndEvent eventData)
+    private void ChangeStage(StageEvents.OnStageEndEvent eventData)
     {
         if (!_stages.TryGetValue(eventData.NextStage, out var stage)) {Debug.LogWarning("Stage is not implemented"); return;}
         _currentStage = stage;
@@ -45,7 +45,7 @@ public class GameStageManager : MonoBehaviour, ISceneManager
 
     public void EndCycle() {_isGameInProgress = false; if (_stageCycleRoutine != null) G.GetManager<RoutineManager>().EndRoutine(_stageCycleRoutine);}
 
-    private void DestroyStages(OnGameEnded _)
+    private void DestroyStages(GameEvents.OnGameEnded _)
     {
         _currentStage.EndStage();
         _stages.Clear();
@@ -54,16 +54,13 @@ public class GameStageManager : MonoBehaviour, ISceneManager
     
     public void Deinitialize()
     {
-        EventService.Unsubscribe<OnGameEnded>(DestroyStages);
-        EventService.Unsubscribe<OnStageEndEvent>(ChangeStage);
+        EventService.Unsubscribe<GameEvents.OnGameEnded>(DestroyStages);
+        EventService.Unsubscribe<StageEvents.OnStageEndEvent>(ChangeStage);
     }
 }
 
 public enum StageNum
 {
-    None,
     StageOne,
-    StageTwo,
-    StageThree,
-    StageFour,
+    StageTwo
 }

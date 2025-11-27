@@ -5,6 +5,6 @@ public class PlayerDespawned : BaseSpecialEvent
 {
     public override void Invoke(ObjectConfig _)
     {
-        EventService.Invoke(new OnPlayerDespawnedEvent());
+        EventService.Invoke(new ConfigEvents.Player_DespawnedEvent());
     }
 }

@@ -13,7 +13,7 @@ public class ComputerUIHandler : MonoBehaviour
     public void InitializeUi(Computer computer)
     {
         var currentStage = DataInjector.InjectState<CurrentGameStage>().Get();
-        var stageObjects = currentStage.StageObjects;
+        var stageObjects = currentStage.StageConfigs;
         var unlockableObjects = stageObjects.Where(o => o.traits.Contains(ObjectTrait.Locked) || o.traits.Contains(ObjectTrait.Unlocked)).ToList();
         foreach (var unlockableObject in unlockableObjects)
         {
@@ -21,7 +21,7 @@ public class ComputerUIHandler : MonoBehaviour
             buttonObject.transform.localPosition = Vector3.zero;
             buttonObject.transform.localRotation = Quaternion.identity;
             var buttonText = buttonObject.GetComponentInChildren<TMP_Text>();
-            buttonText.text = unlockableObject.name;
+            buttonText.text = unlockableObject.configName;
             var button = buttonObject.GetComponent<Button>();
             button.onClick.AddListener(() => computer.MarkObject(unlockableObject));
             _buttons.Add(buttonObject);

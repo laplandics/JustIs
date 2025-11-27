@@ -13,11 +13,11 @@ public class PlayerInputsManager : MonoBehaviour, ISceneManager
 
     public void Initialize()
     {
-        EventService.Subscribe<OnPlayerSpawnedEvent>(AssignPlayer);
-        EventService.Subscribe<OnPlayerDespawnedEvent>(ClearPlayer);
+        EventService.Subscribe<ConfigEvents.Player_SpawnedEvent>(AssignPlayer);
+        EventService.Subscribe<ConfigEvents.Player_DespawnedEvent>(ClearPlayer);
     }
 
-    private void AssignPlayer(OnPlayerSpawnedEvent eventData)
+    private void AssignPlayer(ConfigEvents.Player_SpawnedEvent eventData)
     {
         _player = eventData.Player;
         AssignPlayerHelpers();
@@ -30,7 +30,7 @@ public class PlayerInputsManager : MonoBehaviour, ISceneManager
         _aimRaycaster = new AimRaycaster();
     }
 
-    private void ClearPlayer(OnPlayerDespawnedEvent _) { UnsubscribeCamera(); Deinitialize(); }
+    private void ClearPlayer(ConfigEvents.Player_DespawnedEvent _) { UnsubscribeCamera(); Deinitialize(); }
     
     private void UnsubscribeCamera()
     {
@@ -61,7 +61,7 @@ public class PlayerInputsManager : MonoBehaviour, ISceneManager
     {
         Debug.LogWarning("Redo interaction end");
         if (!_isPlayerActive) return;
-        EventService.Invoke(new OnUiInteractionEnded());
+        EventService.Invoke(new UiEvents.OnUiInteractionEnded());
     }
 
     private void OnLock(InputValue value)

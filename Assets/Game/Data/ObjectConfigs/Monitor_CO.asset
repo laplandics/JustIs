@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603bef85f1474a82928c5eb0ecded6d3, type: 3}
+  m_Name: Monitor_CO
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectConfig
+  configName: Monitor_CO
+  configPrefab: {fileID: 3443866770175899588, guid: 85b2b285913a19841a39235f597027f3, type: 3}
+  objectData:
+  - position: {x: 0, y: 3.763496, z: 5.561412}
+    rotation: {x: -0, y: 0.9962516, z: -0.086503096, w: 0}
+    scale: {x: 1, y: 1, z: 1}
+  - position: {x: -3.4588847, y: 3.7819703, z: 1.2540227}
+    rotation: {x: 0.03784174, y: 0.80637145, z: -0.024898816, w: 0.58967215}
+    scale: {x: 1, y: 1, z: 1}
+  - position: {x: 3.458885, y: 3.7819703, z: 1.2540227}
+    rotation: {x: 0.012199756, y: -0.8071673, z: 0.043627776, w: 0.5885821}
+    scale: {x: 1, y: 1, z: 1}
+  traits: 
+  spawnEvents: []
+  despawnEvents: []
+  stages: 00000000
+  saveStateBetweenStages: 0
+  spawnOrder: 0
+  blockSpawn: 0
+  instances: []

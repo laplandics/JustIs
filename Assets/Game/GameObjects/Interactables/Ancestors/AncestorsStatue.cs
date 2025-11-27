@@ -1,28 +1,58 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using ConfigEvents;
+using UnityEngine;
 
 public class AncestorsStatue : InteractableObject, IExaminable, IGrabable
 {
+    [Header("Grab settings")]
     [SerializeField] private Collider interactionCollider;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform holdPoint;
-    [SerializeField] private Canvas examineUi;
-    [SerializeField] private Transform visual;
-    
-    public Canvas ExamineUi => examineUi;
-    public Transform Visual => visual;
-    public Transform HoldPoint => holdPoint;
-    public Rigidbody Rb => rb;
     public Collider InteractionCollider => interactionCollider;
+    public Rigidbody Rb => rb;
+    public Transform HoldPoint => holdPoint;
     
+    [Header("Examine settings")]
+    [SerializeField] private Canvas ui;
+    [SerializeField] private Transform textContainer;
+    [SerializeField] private Transform visual;
+    public Canvas UI => ui;
+    public Transform TextContainer => textContainer;
+    public Transform Visual => visual;
+
+    private bool _isExamining;
+    private bool _examinedOnce;
+
+    protected override void Launch() { ExamineStory.RegisterStoryObject(GetType()); }
+
     public void Examine()
     {
-        examineUi.gameObject.SetActive(true);
-        Debug.Log(Story.Ancestors.FirstExamine);
+        ui.gameObject.SetActive(true);
+        _isExamining = true;
+        if (!_examinedOnce) { _examinedOnce = true; EventService.Invoke(new AncestorsStatue_ExaminedEvent()); }
+        G.GetManager<RoutineManager>().StartRoutine(ExamineRoutine());
     }
 
+    public IEnumerator ExamineRoutine()
+    {
+        var lines = ExamineStory.GetStoryLines(GetType());
+        var uiTr = textContainer.transform;
+        var textBlocks = new List<TextBlock>();
+        foreach (var line in lines)
+        {
+            var textBlock = new TextBlock(line);
+            textBlock.SpawnElements(uiTr);
+            textBlocks.Add(textBlock);
+        }
+        yield return new WaitUntil(() => !_isExamining);
+        foreach (var textBlock in textBlocks) { textBlock.DespawnElements(); }
+    }
+    
     public void Release()
     {
-        examineUi.gameObject.SetActive(false);
+        _isExamining = false;
+        ui.gameObject.SetActive(false);
     }
 
     public void Grab(Transform parent)
@@ -47,5 +77,11 @@ public class AncestorsStatue : InteractableObject, IExaminable, IGrabable
         tr.rotation = Quaternion.LookRotation(cameraPos - position);
         tr.localScale = Vector3.one;
         Rb.isKinematic = false;
+    }
+
+    public override void Disable()
+    {
+        ExamineStory.UnregisterStoryObject(GetType());
+        base.Disable();
     }
 }

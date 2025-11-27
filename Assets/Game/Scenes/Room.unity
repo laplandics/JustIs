@@ -165,6 +165,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UiManager
   canvasPrefab: {fileID: 866221652047231249, guid: d5a01c894ee738946b48c20c6ef87182, type: 3}
   canvasParent: {fileID: 991709775}
+  examineTextPrefab: {fileID: 6953505248019761634, guid: 334764c8e198d9846bd60b48c010b740, type: 3}
+  examineChoicePrefab: {fileID: 0}
+  examineChoiceButtonPrefab: {fileID: 0}
 --- !u!1 &190149247
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,6 +505,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514cde13987bfdc47995f65270c5ed53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntryPoint
+  gameServices:
+  - {fileID: 11400000, guid: ab48e0b281235d247a3569367b064863, type: 2}
+  - {fileID: 11400000, guid: c8bd39b4e3d15fd4b8d7482b5f8bdcbb, type: 2}
+  - {fileID: 11400000, guid: 15e80dac29b7556428bf42a8294edf95, type: 2}
+  - {fileID: 11400000, guid: f352498a6cfb10b49881697d07297068, type: 2}
   sceneManagers:
   - {fileID: 999144205}
   - {fileID: 1231409891}
@@ -511,11 +519,6 @@ MonoBehaviour:
   - {fileID: 2035294397}
   - {fileID: 1397328221}
   - {fileID: 1443231788}
-  gameServices:
-  - {fileID: 11400000, guid: ab48e0b281235d247a3569367b064863, type: 2}
-  - {fileID: 11400000, guid: c8bd39b4e3d15fd4b8d7482b5f8bdcbb, type: 2}
-  - {fileID: 11400000, guid: 15e80dac29b7556428bf42a8294edf95, type: 2}
-  - {fileID: 11400000, guid: f352498a6cfb10b49881697d07297068, type: 2}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,8 +764,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8f0d2dff864503ad19275ab351ede7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageTwo
-  stageNum: 2
-  stageObjects: []
+  stageNum: 1
+  spawnPlayer: 1
+  stageConfigs: []
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,8 +906,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fb39d8b7244ef69f21ae79e43a95df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageOne
-  stageNum: 1
-  stageObjects: []
+  stageNum: 0
+  spawnPlayer: 1
+  stageConfigs: []
 --- !u!1 &991709774
 GameObject:
   m_ObjectHideFlags: 0

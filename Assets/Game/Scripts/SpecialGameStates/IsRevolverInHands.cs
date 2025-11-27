@@ -6,7 +6,7 @@ public class IsRevolverInHands : SpecialGameState<bool>
     public override void Set(bool status)
     {
         value = status;
-        EventService.Invoke(new OnRevolverGrabStatusChanged {IsGrabbed = status});
+        EventService.Invoke(new ConfigEvents.Revolver_GrabStatusChangedEvent {IsGrabbed = status});
         base.Set(status);
     }
 

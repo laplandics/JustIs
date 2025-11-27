@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a31c88ef39b4340b71a330a95012b46, type: 3}
+  m_Name: ConfigsService
+  m_EditorClassIdentifier: Assembly-CSharp::StageObjectsService
+  label:
+    m_LabelString: ObjectConfig
+  savedPaths:
+  - Assets/Game/Data/ObjectConfigs/3DPrinter_CO.asset
+  - Assets/Game/Data/ObjectConfigs/AncestorsStatue_CO.asset
+  - Assets/Game/Data/ObjectConfigs/RoomCenterTable_CO.asset
+  - Assets/Game/Data/ObjectConfigs/Computer_CO.asset
+  - Assets/Game/Data/ObjectConfigs/ExplosiveCollar_CO.asset
+  - Assets/Game/Data/ObjectConfigs/RoomLargeTable_CO.asset
+  - Assets/Game/Data/ObjectConfigs/RoomMetalTable_CO.asset
+  - Assets/Game/Data/ObjectConfigs/Monitor_CO.asset
+  - Assets/Game/Data/ObjectConfigs/Person_CO.asset
+  - Assets/Game/Data/ObjectConfigs/Revolver_CO.asset
+  - Assets/Game/Data/ObjectConfigs/SuicidePlane_CO.asset
+  - Assets/Game/Data/ObjectConfigs/Tablet_CO.asset
+  - Assets/Game/Data/ObjectConfigs/Quad_CO.asset
+  - Assets/Game/Data/ObjectConfigs/Room_CO.asset
+  - Assets/Game/Data/ObjectConfigs/RoomShelf_CO.asset
+  - Assets/Game/Data/ObjectConfigs/RoomStool_CO.asset
+  - Assets/Game/Data/ObjectConfigs/SmallWall_CO.asset
+  - Assets/Game/Data/ObjectConfigs/Player_CO.asset
+  configs: []
+  savedConfigs: []

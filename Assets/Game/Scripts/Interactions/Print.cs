@@ -17,7 +17,7 @@ public class Print : BaseInteraction
         if (printingSpot.childCount > 0) return false;
         if (!base.IsRelevant(colliderInfo)) return false;
         if (config.objectData.Count == 0) return false;
-        if (!config.objectData[0].prefab.TryGetComponent<IGrabable>(out _)) return false;
+        if (!config.configPrefab.TryGetComponent<IGrabable>(out _)) return false;
         UpdateUI(true);
         return true;
     }

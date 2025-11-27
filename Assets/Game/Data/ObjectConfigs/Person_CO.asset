@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603bef85f1474a82928c5eb0ecded6d3, type: 3}
+  m_Name: Person_CO
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectConfig
+  configName: Person_CO
+  configPrefab: {fileID: 5245033197510155566, guid: b2ac6bd1e7fcdb3428f2e8a80808dfbf, type: 3}
+  objectData:
+  - position: {x: 0, y: 2.796, z: 4.74}
+    rotation: {x: 0, y: 0.785317, z: -0.61909384, w: 0}
+    scale: {x: 1, y: 1, z: 1}
+  traits: 
+  spawnEvents: []
+  despawnEvents:
+  - {fileID: 11400000, guid: c0b2ba7f5cada9241a8390a2955a710d, type: 2}
+  stages: 00000000
+  saveStateBetweenStages: 0
+  spawnOrder: 0
+  blockSpawn: 0
+  instances: []

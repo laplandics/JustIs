@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class EventService : ScriptableObject, IGameService
 {
     private static readonly Dictionary<Type, Delegate> Subscribers = new();
     
-    public void Run() {}
+    public IEnumerator Run() { yield break; }
 
     public static void Subscribe<T>(Action<T> handler)
     {
@@ -24,11 +25,11 @@ public class EventService : ScriptableObject, IGameService
         else Subscribers[type] = existing;
     }
 
-    public static void Invoke<T>(T eventData)
+    public static void Invoke<T>(T eventData) where T : Event
     {
         var type = typeof(T);
         if (Subscribers.TryGetValue(type, out var del)) (del as Action<T>)?.Invoke(eventData);
     }
     
-    public void Stop() => Subscribers.Clear();
+    public void Stop() { Subscribers.Clear(); }
 }

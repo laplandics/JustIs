@@ -16,19 +16,19 @@ public class Examine : BaseInteraction, ICameraLocker, IInputsChanger
 
     public override void PerformInteraction()
     {
-        EventService.Invoke(new OnUiInteractionStarted {InputsType = InputsType, CameraConfigPreset = CameraConfigPreset});
+        EventService.Invoke(new UiEvents.OnUiInteractionStarted {InputsType = InputsType, CameraConfigPreset = CameraConfigPreset});
         var player = G.GetManager<PlayerInputsManager>().GetPlayer();
         player.Hand.gameObject.SetActive(false);
         player.SetVisual(false);
         GetComponent<IExaminable>()?.Examine();
-        EventService.Subscribe<OnUiInteractionEnded>(EndExamineInteraction);
+        EventService.Subscribe<UiEvents.OnUiInteractionEnded>(EndExamineInteraction);
     }
 
     public override void CancelInteraction() {}
 
-    private void EndExamineInteraction(OnUiInteractionEnded _)
+    private void EndExamineInteraction(UiEvents.OnUiInteractionEnded _)
     {
-        EventService.Unsubscribe<OnUiInteractionEnded>(EndExamineInteraction);
+        EventService.Unsubscribe<UiEvents.OnUiInteractionEnded>(EndExamineInteraction);
         GetComponent<IExaminable>()?.Release();
         var player = G.GetManager<PlayerInputsManager>().GetPlayer();
         player.Hand.gameObject.SetActive(true);

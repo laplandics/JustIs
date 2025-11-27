@@ -1,33 +1,34 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EntryPoint : MonoBehaviour
 {
-    [SerializeField] private MonoBehaviour[] sceneManagers;
     [SerializeField] private ScriptableObject[] gameServices;
+    [SerializeField] private MonoBehaviour[] sceneManagers;
     
-    private void Start()
+    private IEnumerator Start()
     {
         Application.quitting += OnEnd;
-        InitializeGameServices();
-        InitializeSceneManagers();
+        yield return InitializeGameServices();
+        yield return InitializeSceneManagers();
         DataInjector.InjectState<IsGameStarted>().Set(true);
         EnableInputs();
     }
 
-    private void InitializeGameServices()
+    private IEnumerator InitializeGameServices()
     {
         var services = new List<IGameService>();
         foreach (var service in gameServices)
         {
             if (service is not IGameService gameService) continue;
-            gameService.Run();
+            yield return gameService.Run();
             services.Add(gameService);
         }
         G.CacheSceneManagers(services);
     }
 
-    private void InitializeSceneManagers()
+    private IEnumerator InitializeSceneManagers()
     {
         var managers = new List<ISceneManager>();
         foreach (var manager in sceneManagers)
@@ -35,6 +36,7 @@ public class EntryPoint : MonoBehaviour
             if (manager is not ISceneManager sceneManager) continue;
             sceneManager.Initialize();
             managers.Add(sceneManager);
+            yield return null;
         }
         G.CacheGameServices(managers);
     }

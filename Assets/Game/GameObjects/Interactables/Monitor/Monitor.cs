@@ -24,7 +24,7 @@ public class Monitor : InteractableObject, IShootable
     protected override void Launch()
     {
         _uIChanger = new MonitorUIChanger(this);
-        EventService.Subscribe<OnMonitorUiChangedEvent>(_uIChanger.SetMonitorUi);
+        EventService.Subscribe<ConfigEvents.Monitor_UiChangedEvent>(_uIChanger.SetMonitorUi);
         DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.Error);
     }
 
@@ -40,7 +40,7 @@ public class Monitor : InteractableObject, IShootable
         DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.Error, this);
         IsMonitorBroken = true;
         DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.GoodJob);
-        EventService.Invoke(new OnMonitorShotEvent());
+        EventService.Invoke(new ConfigEvents.Monitor_ShotEvent());
     }
 
     public void ReleaseAim()
@@ -52,7 +52,7 @@ public class Monitor : InteractableObject, IShootable
     public override void Disable()
     {
         DataInjector.InjectState<CurrentMonitorUi>().Set(MonitorUiType.Error);
-        EventService.Unsubscribe<OnMonitorUiChangedEvent>(_uIChanger.SetMonitorUi);
+        EventService.Unsubscribe<ConfigEvents.Monitor_UiChangedEvent>(_uIChanger.SetMonitorUi);
         base.Disable();
     }
 }

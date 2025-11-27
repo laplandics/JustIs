@@ -1,21 +1,33 @@
+using System.Collections;
 using UnityEngine;
 
 public class Tablet : InteractableObject, IExaminable
 {
-    [SerializeField] private Canvas examineUi;
+    [SerializeField] private Canvas ui;
     [SerializeField] private Transform visual;
-
-    public Canvas ExamineUi => examineUi;
+    [SerializeField] private Transform textContainer;
+    private bool _isExamining;
+    
+    public Transform TextContainer => textContainer;
+    public Canvas UI => ui;
     public Transform Visual => visual;
 
     public void Examine()
     {
-        examineUi.gameObject.SetActive(true);
+        _isExamining = true;
+        ui.gameObject.SetActive(true);
+        G.GetManager<RoutineManager>().StartRoutine(ExamineRoutine());
+    }
+
+    public IEnumerator ExamineRoutine()
+    {
+        yield return new WaitUntil(() => !_isExamining);
     }
 
     public void Release()
     {
-        examineUi.gameObject.SetActive(false);
-        EventService.Invoke(new OnTabletExaminedEvent());
+        _isExamining = false;
+        ui.gameObject.SetActive(false);
+        EventService.Invoke(new ConfigEvents.Tablet_ExaminedEvent());
     }
 }

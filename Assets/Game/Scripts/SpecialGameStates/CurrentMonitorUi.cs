@@ -7,7 +7,7 @@ public class CurrentMonitorUi : SpecialGameState<MonitorUiType, Monitor>
     public override void Set(MonitorUiType ui, Monitor monitor = null)
     {
         value1 = ui;
-        EventService.Invoke(new OnMonitorUiChangedEvent {Command = ui, SpecificTarget = monitor});
+        EventService.Invoke(new ConfigEvents.Monitor_UiChangedEvent {Command = ui, SpecificTarget = monitor});
         base.Set(ui, monitor);
     }
 
