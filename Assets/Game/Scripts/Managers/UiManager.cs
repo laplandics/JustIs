@@ -10,7 +10,6 @@ public class UiManager : MonoBehaviour, ISceneManager
     
     [Header("Examine UI Elements")]
     [SerializeField] private GameObject examineTextPrefab;
-    [SerializeField] private GameObject examineChoicePrefab;
     [SerializeField] private GameObject examineChoiceButtonPrefab;
     
     private InteractableObject _interactable;
@@ -51,21 +50,24 @@ public class UiManager : MonoBehaviour, ISceneManager
         return result;
     }
 
-    public List<Button> SpawnExamineChoices(List<string> choices, Transform parent, out GameObject container)
+    public List<Button> SpawnExamineChoices(List<string> choices, Transform container)
     {
-        container = null;
-        return new List<Button>();
+        var choiceButtons = new List<Button>();
+        foreach (var choice in choices)
+        {
+            var choiceObject = SpawnManager.Spawn(examineChoiceButtonPrefab, Vector3.zero, Quaternion.identity, container);
+            choiceObject.transform.localPosition = Vector3.zero;
+            var button = choiceObject.GetComponent<Button>();
+            choiceButtons.Add(button);
+            choiceObject.GetComponent<TMP_Text>().text = choice;
+        }
+        return choiceButtons;
     }
 
     public void DespawnExamineElements(List<GameObject> elements)
     {
         foreach (var element in elements) { SpawnManager.Despawn(element); }
         elements.Clear();
-    }
-    
-    public void DespawnExamineElement(GameObject element)
-    {
-        
     }
     
     public void Deinitialize()

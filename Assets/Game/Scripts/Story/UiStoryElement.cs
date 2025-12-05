@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class UiStoryElement
 {
     protected List<string> Elements { get; set; }
     protected List<GameObject> Instances;
-    public virtual void SpawnElements(Transform ui) {}
+    public virtual void SpawnElements(Transform container) {}
     public virtual void DespawnElements() {}
 }
 
@@ -16,11 +17,11 @@ public class TextBlock : UiStoryElement
 {
     public TextBlock(List<string> texts) { Elements = texts; }
     
-    public override void SpawnElements(Transform ui)
+    public override void SpawnElements(Transform container)
     {
         Instances = new List<GameObject>();
-        var texts = G.GetManager<UiManager>().SpawnExamineTexts(Elements, ui);
-        for (var i = 0; i < Elements.Count; i++) { texts[i].text = Elements[i]; Instances.Add(texts[i].gameObject); }
+        var texts = G.GetManager<UiManager>().SpawnExamineTexts(Elements, container);
+        foreach (var text in texts) { Instances.Add(text.gameObject); }
     }
 
     public override void DespawnElements()
@@ -32,33 +33,31 @@ public class TextBlock : UiStoryElement
 
 public class Choice : UiStoryElement
 {
-    private readonly Dictionary<string, Action> _choices;
-    private GameObject _container;
+    private readonly Dictionary<string, Action<Button>> _choices;
     
-    public Choice(Dictionary<string, Action> choices)
+    public Choice(Dictionary<string, Action<Button>> choices)
     {
         Elements = choices.Keys.ToList();
         _choices = choices;
     }
-    public override void SpawnElements(Transform ui)
+    public override void SpawnElements(Transform container)
     {
         Instances = new List<GameObject>();
-        var choiceButtons = G.GetManager<UiManager>().SpawnExamineChoices(Elements, ui, out _container);
+        var choiceButtons = G.GetManager<UiManager>().SpawnExamineChoices(Elements, container);
         foreach (var button in choiceButtons)
         {
-            var choiceButtonText = button.GetComponentInChildren<TMP_Text>().text;
-            button.onClick.AddListener(_choices[choiceButtonText].Invoke);
             Instances.Add(button.gameObject);
+            var buttonText = button.GetComponentInChildren<TMP_Text>().text;
+            button.onClick.AddListener(() => _choices[buttonText].Invoke(button));
         }
     }
     public override void DespawnElements()
     {
         G.GetManager<UiManager>().DespawnExamineElements(Instances);
-        G.GetManager<UiManager>().DespawnExamineElement(_container);
     }
 }
 
 public class Next : UiStoryElement
 {
-    public override void SpawnElements(Transform ui) {}
+    public override void SpawnElements(Transform container) {}
 }

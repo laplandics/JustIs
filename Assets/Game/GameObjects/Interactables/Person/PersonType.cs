@@ -9,12 +9,14 @@ public class PersonType : ScriptableObject
     public TriggerAction[] triggers;
     private Person _person;
     
+    [Header("Examine stories")]
+    [SerializeField] private StoryData[] examineStories;
+    public StoryData[] ExamineStories => examineStories;
+    
     [Header("Mood settings")]
     public float defaultMood;
     [SerializeField] private SourceMoodSettings[] moodSources;
     private readonly Dictionary<MoodChangeSource, SourceMoodSettings> _moodSettings = new();
-
-    public static List<string> FirstMetLines => new() { Story.Person.FirstMeet };
     
     public void Initialize(Person person)
     {

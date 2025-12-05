@@ -46,4 +46,10 @@ public class Revolver : InteractableObject, IGrabable
         var rotationRandom = new Vector3(randomX, randomY, randomZ);
         return rotationRandom;
     }
+
+    public override void Disable()
+    {
+        DataInjector.InjectState<IsRevolverInHands>().Set(false);
+        base.Disable();
+    }
 }

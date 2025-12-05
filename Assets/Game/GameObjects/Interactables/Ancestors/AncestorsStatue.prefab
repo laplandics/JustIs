@@ -157,8 +157,11 @@ MonoBehaviour:
   rb: {fileID: -2284044515241992708}
   holdPoint: {fileID: 6020875443404692666}
   ui: {fileID: 3057245805699878382}
-  textContainer: {fileID: 1510712562192915264}
   visual: {fileID: 3224163087214779107}
+  examineContainer: {fileID: 1510712562192915264}
+  buttonsContainer: {fileID: 4318434013820221418, guid: a766af2414a123f40965d22612e45686, type: 3}
+  examineStories:
+  - {fileID: 11400000, guid: fb29030aea23d994588c8ac2afc10d76, type: 2}
 --- !u!114 &8041835424261333886
 MonoBehaviour:
   m_ObjectHideFlags: 0

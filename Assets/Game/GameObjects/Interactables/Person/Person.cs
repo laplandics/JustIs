@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Person : InteractableObject, IShootable, IExaminable
@@ -12,7 +10,8 @@ public class Person : InteractableObject, IShootable, IExaminable
     [Header("IExaminable settings")]
     [SerializeField] private Canvas ui;
     [SerializeField] private Transform visual;
-    private bool _isExamining;
+    [SerializeField] private Transform buttonsContainer;
+    private ExamineStoryRoutine _storyRoutine;
     
     [Header("IShootable settings")]
     [SerializeField] private float timeToShoot;
@@ -20,26 +19,22 @@ public class Person : InteractableObject, IShootable, IExaminable
     
     [Header("Ui settings")]
     [SerializeField] private PersonUIHandler uiHandler;
-    [SerializeField] private Transform textContainer;
+    [SerializeField] private Transform examineContainer;
     
     [Header("Mood settings")]
     [SerializeField] private PersonMoodHandler moodHandler;
 
-    public Transform TextContainer => textContainer;
     public PersonType CurrentPersonType { get; private set; }
     public PersonUIHandler UIHandler => uiHandler;
-    public PersonMoodHandler MoodHandler => moodHandler;
-    public Canvas UI => ui;
-    public Transform Visual => visual;
     
     protected override void Launch()
     {
         if (!Application.isPlaying) return;
-        ExamineStory.RegisterStoryObject(GetType());
         G.GetManager<RoutineManager>().StartUpdateAction(UpdateColliderRotation);
         CurrentPersonType = GetPersonType();
         moodHandler.Initialize();
         uiHandler.InitializeUi();
+        _storyRoutine = new ExamineStoryRoutine(buttonsContainer, examineContainer, CurrentPersonType.ExamineStories, this);
     }
 
     private void UpdateColliderRotation() { transform.rotation = bodyKey.rotation; }
@@ -81,30 +76,16 @@ public class Person : InteractableObject, IShootable, IExaminable
 
     public void Examine()
     {
-        _isExamining = true;
         ui.gameObject.SetActive(true);
-        EventService.Invoke(new ConfigEvents.Person_TalkEvent {Person = this});
-        G.GetManager<RoutineManager>().StartRoutine(ExamineRoutine());
-    }
-    
-    public IEnumerator ExamineRoutine()
-    {
-        var lines = ExamineStory.GetStoryLines(GetType());
-        var textBlocks = new List<TextBlock>();
-        foreach (var line in lines)
-        {
-            var textBlock = new TextBlock(line);
-            textBlock.SpawnElements(textContainer);
-            textBlocks.Add(textBlock);
-        }
-        yield return new WaitUntil(() => !_isExamining);
-        foreach (var textBlock in textBlocks) textBlock.DespawnElements();
+        DataInjector.InjectState<TalkingWithPerson>().Set(true, this);
+        _storyRoutine.StartExamine();
     }
 
     public void Release()
     {
-        _isExamining = false;
         ui.gameObject.SetActive(false);
+        DataInjector.InjectState<TalkingWithPerson>().Set(false);
+        _storyRoutine.StopExamine();
     }
 
     public override void Disable()
@@ -114,7 +95,8 @@ public class Person : InteractableObject, IShootable, IExaminable
         CurrentPersonType = null;
         uiHandler.DeInitializeUi();
         moodHandler.Deinitialize();
-        ExamineStory.UnregisterStoryObject(GetType());
+        _storyRoutine.Dispose();
+        DataInjector.InjectState<TalkingWithPerson>().Set(false);
         base.Disable();
     }
 }

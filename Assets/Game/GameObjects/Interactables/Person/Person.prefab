@@ -3250,9 +3250,10 @@ MonoBehaviour:
   bodyKey: {fileID: 4484905514527759689}
   ui: {fileID: 2816147332503889490}
   visual: {fileID: 7123956750012009872}
+  buttonsContainer: {fileID: 4318434013820221418, guid: a766af2414a123f40965d22612e45686, type: 3}
   timeToShoot: 0.8
   uiHandler: {fileID: 6008209407395124020}
-  textContainer: {fileID: 1841500396212662524}
+  examineContainer: {fileID: 1841500396212662524}
   moodHandler: {fileID: 2463802055173276989}
 --- !u!114 &2187296701837037166
 MonoBehaviour:
@@ -4416,13 +4417,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExamineUi
       objectReference: {fileID: 0}
-    - target: {fileID: 2246207058959028802, guid: 8a2e7cfb473fe464990e56d9c896e74f, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 1481664008870892482, guid: 8a2e7cfb473fe464990e56d9c896e74f, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2246207058959028802, guid: 8a2e7cfb473fe464990e56d9c896e74f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246207058959028802, guid: 8a2e7cfb473fe464990e56d9c896e74f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3898638471350983260, guid: 8a2e7cfb473fe464990e56d9c896e74f, type: 3}
       propertyPath: m_Pivot.x
@@ -4506,19 +4511,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4356314816237276863, guid: 8a2e7cfb473fe464990e56d9c896e74f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7073264078503557445, guid: 8a2e7cfb473fe464990e56d9c896e74f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7073264078503557445, guid: 8a2e7cfb473fe464990e56d9c896e74f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 8777523957129404512, guid: 8a2e7cfb473fe464990e56d9c896e74f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8777523957129404512, guid: 8a2e7cfb473fe464990e56d9c896e74f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8777523957129404512, guid: 8a2e7cfb473fe464990e56d9c896e74f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

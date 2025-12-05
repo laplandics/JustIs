@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class Computer : InteractableObject, IExaminable
@@ -6,28 +5,17 @@ public class Computer : InteractableObject, IExaminable
     [SerializeField] private Canvas ui;
     [SerializeField] private Transform visual;
     [SerializeField] private ComputerUIHandler computerUIHandler;
-    [SerializeField] private Transform textContainer;
-    private bool _isExamining;
+    [SerializeField] private Transform examineContainer;
+    [SerializeField] private Transform buttonsContainer;
 
-    public Transform TextContainer => textContainer;
-    public Canvas UI => ui;
-    public Transform Visual => visual;
     public void Examine()
     {
-        _isExamining = true;
         ui.gameObject.SetActive(true);
         computerUIHandler.InitializeUi(this);
-        G.GetManager<RoutineManager>().StartRoutine(ExamineRoutine());
-    }
-
-    public IEnumerator ExamineRoutine()
-    {
-        yield return new WaitUntil(() => !_isExamining);
     }
 
     public void Release()
     {
-        _isExamining = false;
         computerUIHandler.DeInitializeUi();
         ui.gameObject.SetActive(false);
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -50,4 +49,28 @@ namespace ConfigEvents
     public class Person_MoodChangedEvent : ConfigEvent { public Person Person; public MoodChangeSource Source; public float Amount; }
 
     public class AncestorsStatue_ExaminedEvent : ConfigEvent {}
+}
+
+namespace ExamineEvents
+{
+    public class OnStoryChoiceMadeEvent : Event
+    {
+        public ChoiceEvent StoryEvent;
+
+        public class ChoiceEvent
+        {
+            
+        }
+        
+        public class StoryPathBegin : ChoiceEvent
+        {
+            public IExaminable Target;
+            public StoryData Path;
+        }
+
+        public class StoryPathEnd : ChoiceEvent
+        {
+            
+        }
+    }
 }

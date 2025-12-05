@@ -16,6 +16,8 @@ MonoBehaviour:
   triggers:
   - {fileID: 11400000, guid: 140b6ef4aadd5f44baefb5cae6713bf0, type: 2}
   - {fileID: 11400000, guid: 8242ead6a9839da469018a7dc709995b, type: 2}
+  examineStories:
+  - {fileID: 11400000, guid: 749edc85228dc7745b7ccbd6d00b1ab7, type: 2}
   defaultMood: 0.35
   moodSources:
   - source: 0

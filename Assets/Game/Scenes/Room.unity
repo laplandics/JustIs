@@ -166,8 +166,8 @@ MonoBehaviour:
   canvasPrefab: {fileID: 866221652047231249, guid: d5a01c894ee738946b48c20c6ef87182, type: 3}
   canvasParent: {fileID: 991709775}
   examineTextPrefab: {fileID: 6953505248019761634, guid: 334764c8e198d9846bd60b48c010b740, type: 3}
-  examineChoicePrefab: {fileID: 0}
-  examineChoiceButtonPrefab: {fileID: 0}
+  examineChoiceContainerPrefab: {fileID: 5823375658556349256, guid: a766af2414a123f40965d22612e45686, type: 3}
+  examineChoiceButtonPrefab: {fileID: 7582952126296671141, guid: bad3898aa0933e84e8ae935d17723003, type: 3}
 --- !u!1 &190149247
 GameObject:
   m_ObjectHideFlags: 0
