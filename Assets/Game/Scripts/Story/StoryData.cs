@@ -8,4 +8,10 @@ public abstract class StoryData : ScriptableObject
     public abstract bool GetStatus(IExaminable target);
     
     public UiStoryElement[] GetStoryElements() => StoryElements;
+
+    public virtual void ResetStoryState()
+    {
+        StoryElements = null;
+        Target = null;
+    }
 }

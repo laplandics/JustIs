@@ -34,5 +34,6 @@ MonoBehaviour:
   - Assets/Game/Data/ObjectConfigs/SmallWall_CO.asset
   - Assets/Game/Data/ObjectConfigs/Player_CO.asset
   - Assets/Game/Data/ObjectConfigs/RoomCamera_CO.asset
+  - Assets/Game/Data/ObjectConfigs/Hammer_CO.asset
   configs: []
   savedConfigs: []

@@ -2,25 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Story.Ancestors;
 
-[CreateAssetMenu(fileName = "AncestorsFirstExamine", menuName = "GameData/Story/Ancestors/FirstExamine")]
-public class AncestorsFirstExamineStory : StoryData
+[CreateAssetMenu(fileName = "AncestorsDefaultExamine", menuName = "GameData/Story/Ancestors/DefaultExamine")]
+public class AncestorsDefaultExamineStory : StoryData
 {
+    [SerializeField] private bool isAlreadySeen;
+    
     public override bool GetStatus(IExaminable target)
     {
         Target = target;
         if (!DataInjector.InjectState<IsAncestorsStatueExamined>().Get()) return false;
-        SetInitialStory();
+        if (isAlreadySeen) SetAltInitialStory();
+        else SetInitialStory();
+        isAlreadySeen = true;
         return true;
     }
 
     private void SetInitialStory()
     {
-        var textLine1 = Story.Ancestors.FirstExamineText1;
-        var textLine2 = Story.Ancestors.FirstExamineText2;
-        var textLine3 = Story.Ancestors.FirstExamineText3;
-        var choiceLine1 = Story.Ancestors.FirstExamineChoice1;
-        var choiceLine2 = Story.Ancestors.FirstExamineChoice2;
+        var textLine1 = DefaultExamineText1;
+        var textLine2 = DefaultExamineText2;
+        var textLine3 = DefaultExamineText3;
+        var choiceLine1 = DefaultExamineChoice1;
+        var choiceLine2 = DefaultExamineChoice2;
         var choices = new Dictionary<string, Action<Button>>
         {
             [choiceLine1] = Examine,
@@ -33,10 +38,27 @@ public class AncestorsFirstExamineStory : StoryData
         };
     }
 
+    private void SetAltInitialStory()
+    {
+        var textLine1 = DefaultExamineText1Alt;
+        var choiceLine1 = DefaultExamineChoice1;
+        var choiceLine2 = DefaultExamineChoice2;
+        var choices = new Dictionary<string, Action<Button>>
+        {
+            [choiceLine1] = Examine,
+            [choiceLine2] = Release
+        };
+        StoryElements = new UiStoryElement[]
+        {
+            new TextBlock(new List<string> {textLine1}),
+            new Choice(choices)
+        };
+    }
+
     private void SetExamineStory()
     {
-        var textLine1 = Story.Ancestors.FirstExamineAfterChoice1Text1;
-        var choiceLine1 = Story.Ancestors.FirstExamineAfterChoice1Choice1;
+        var textLine1 = DefaultExamineAfterChoice1Text1;
+        var choiceLine1 = DefaultExamineAfterChoice1Choice1;
         var choices = new Dictionary<string, Action<Button>>
         {
             [choiceLine1] = GoBack,
@@ -66,5 +88,11 @@ public class AncestorsFirstExamineStory : StoryData
         button.interactable = false;
         var storyEvent = new ExamineEvents.OnStoryChoiceMadeEvent.StoryPathEnd();
         EventService.Invoke(new ExamineEvents.OnStoryChoiceMadeEvent { StoryEvent =  storyEvent });
+    }
+
+    public override void ResetStoryState()
+    {
+        isAlreadySeen = false;
+        base.ResetStoryState();
     }
 }

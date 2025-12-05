@@ -2,16 +2,17 @@
 {
     public static class Ancestors
     {
-        public static string FirstExamineText1 => "Золотая статуэтка. С виду ничего особенного: двое мужчин стоят с торжествующим видом, " +
+        public static string DefaultExamineText1 => "Золотая статуэтка. С виду ничего особенного: двое мужчин стоят с торжествующим видом, " +
                                                   "один из них победоносно поднял руку над головой.";
-        public static string FirstExamineText2 => "А, быть может, это призыв к продолжению борьбы?";
-        public static string FirstExamineText3 => "И что бы за борьба это была...";
+        public static string DefaultExamineText1Alt => "Золотая статуэтка.";
+        public static string DefaultExamineText2 => "А, быть может, это призыв к продолжению борьбы?";
+        public static string DefaultExamineText3 => "И что бы за борьба это была...";
 
-        public static string FirstExamineChoice1 => "*Осмотреть*";
-        public static string FirstExamineChoice2 => "*Отложить*";
+        public static string DefaultExamineChoice1 => "*Осмотреть*";
+        public static string DefaultExamineChoice2 => "*Отложить*";
 
-        public static string FirstExamineAfterChoice1Text1 => "Ничего примечательного.";
-        public static string FirstExamineAfterChoice1Choice1 => "Ясно.";
+        public static string DefaultExamineAfterChoice1Text1 => "Ничего примечательного.";
+        public static string DefaultExamineAfterChoice1Choice1 => "Ясно.";
     }
 
     public static class Person

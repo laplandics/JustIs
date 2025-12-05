@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bea09858fedc47709cedf6e410c78d31, type: 3}
-  m_Name: AncestorsFirstExamine
+  m_Name: AncestorsDefaultExamine
   m_EditorClassIdentifier: Assembly-CSharp::AncestorsFirstExamineStory
   isSeen: 0

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Story.Person;
 
 [CreateAssetMenu(fileName = "CowardlyPersonFirstMet", menuName = "GameData/Story/Person/CowardlyType/FirstMet")]
 public class CowardlyPersonFirstMetStory : StoryData
@@ -16,9 +17,9 @@ public class CowardlyPersonFirstMetStory : StoryData
 
     private void SetInitialStory()
     {
-        var textLine1 = Story.Person.FirstMeetText1;
-        var choiceLine1 = Story.Person.FirstMeetChoice1;
-        var choiceLine2 = Story.Person.FirstMeetChoice2;
+        var textLine1 = FirstMeetText1;
+        var choiceLine1 = FirstMeetChoice1;
+        var choiceLine2 = FirstMeetChoice2;
         var choices = new Dictionary<string, Action<Button>>
         {
             [choiceLine1] = SayHi,
@@ -33,8 +34,8 @@ public class CowardlyPersonFirstMetStory : StoryData
 
     private void SayHiStory()
     {
-        var textLine1 = Story.Person.FirstMeetAfterChoice1Text1;
-        var choiceLine1 = Story.Person.FirstMeetChoice2;
+        var textLine1 = FirstMeetAfterChoice1Text1;
+        var choiceLine1 = FirstMeetChoice2;
         var choices = new Dictionary<string, Action<Button>>
         {
             [choiceLine1] = Leave

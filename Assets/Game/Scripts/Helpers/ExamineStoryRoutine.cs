@@ -112,6 +112,7 @@ public class ExamineStoryRoutine : IDisposable
 
     public void Dispose()
     {
+        foreach (var story in _examineStories) { story?.ResetStoryState(); }
         _buttonsContainer = null;
         _examineContainer = null;
         _examineStories = null;

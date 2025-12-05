@@ -6,21 +6,17 @@ public class Revolver : InteractableObject, IGrabable
     [SerializeField] private Transform holdPoint;
     [SerializeField] private Rigidbody rb;
     
-    public Rigidbody Rb => rb;
-    public Transform HoldPoint => holdPoint;
-    public Collider InteractionCollider => interactionCollider;
-
     public void Grab(Transform parent)
     {
         interactionCollider.enabled = false;
-        Rb.isKinematic = true;
+        rb.isKinematic = true;
         var tr = transform;
         tr.SetParent(parent);
         tr.position = parent.position;
         tr.rotation = parent.rotation;
         tr.localScale = Vector3.one;
-        tr.localPosition -= HoldPoint.localPosition;
-        tr.localRotation = Quaternion.Inverse(HoldPoint.localRotation);
+        tr.localPosition -= holdPoint.localPosition;
+        tr.localRotation = Quaternion.Inverse(holdPoint.localRotation);
         
         DataInjector.InjectState<IsRevolverInHands>().Set(true);
     }
@@ -33,7 +29,7 @@ public class Revolver : InteractableObject, IGrabable
         tr.position = position;
         tr.rotation = Quaternion.Euler(GetRotation());
         tr.localScale = Vector3.one;
-        Rb.isKinematic = false;
+        rb.isKinematic = false;
         
         DataInjector.InjectState<IsRevolverInHands>().Set(false);
     }

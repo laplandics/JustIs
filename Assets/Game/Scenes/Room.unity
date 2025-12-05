@@ -166,7 +166,6 @@ MonoBehaviour:
   canvasPrefab: {fileID: 866221652047231249, guid: d5a01c894ee738946b48c20c6ef87182, type: 3}
   canvasParent: {fileID: 991709775}
   examineTextPrefab: {fileID: 6953505248019761634, guid: 334764c8e198d9846bd60b48c010b740, type: 3}
-  examineChoiceContainerPrefab: {fileID: 5823375658556349256, guid: a766af2414a123f40965d22612e45686, type: 3}
   examineChoiceButtonPrefab: {fileID: 7582952126296671141, guid: bad3898aa0933e84e8ae935d17723003, type: 3}
 --- !u!1 &190149247
 GameObject:
@@ -545,14 +544,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2.01
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
